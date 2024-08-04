@@ -1,3 +1,9 @@
+import HomepageLayout from "../features/Homepage/HomepageLayout";
+
 export default function Homepage() {
-  return <div>Homepage</div>;
+  return (
+    <>
+      <HomepageLayout />
+    </>
+  );
 }

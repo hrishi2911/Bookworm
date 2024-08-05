@@ -14,7 +14,7 @@ const variations = {
     font-size: 1.6rem;
     text-transform: capitalize;
     font-weight: 600;
-    width: 200px;
+    width: 180px;
   `,
   author: css`
     width: 200px;

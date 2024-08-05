@@ -4,15 +4,22 @@ import EbookProduct from "./EbookProduct";
 export default function EbookContainer({ arr }) {
   return (
     <ProductBoxContainer>
-      {arr.map(({ imageUrl, bookname, price, author }, index) => (
-        <EbookProduct
-          key={index}
-          imageURL={imageUrl}
-          bookname={bookname}
-          price={price}
-          author={author}
-        />
-      ))}
+      {arr
+        .filter((product, index) => index < 4)
+        .map(
+          (
+            { productImg, productName, productOfferPrice, productAuthor },
+            index
+          ) => (
+            <EbookProduct
+              key={index}
+              productImg={"../" + productImg}
+              productName={productName}
+              productOfferPrice={productOfferPrice}
+              productAuthor={productAuthor}
+            />
+          )
+        )}
     </ProductBoxContainer>
   );
 }
@@ -23,5 +30,4 @@ const ProductBoxContainer = styled.div`
   gap: 20px;
   column-gap: 100px;
   margin-left: 10px;
-  justify-content: space-around;
 `;

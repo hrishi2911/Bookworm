@@ -4,22 +4,27 @@ import MusicOrVideoProduct from "./MusicOrVideoProduct";
 export default function MusicOrVideoContainer({ arr }) {
   return (
     <ProductBoxContainer>
-      {arr.map(({ imageUrl, bookname, price, author }, index) => (
-        <MusicOrVideoProduct
-          key={index}
-          imageURL={imageUrl}
-          bookname={bookname}
-          price={price}
-          author={author}
-        />
-      ))}
+      {arr
+        .filter((product, index) => index < 3)
+        .map(
+          (
+            { productImg, productName, productOfferPrice, productAuthor },
+            index
+          ) => (
+            <MusicOrVideoProduct
+              key={index}
+              productImg={productImg}
+              productName={productName}
+              productOfferPrice={productOfferPrice}
+              productAuthor={productAuthor}
+            />
+          )
+        )}
     </ProductBoxContainer>
   );
 }
 
 const ProductBoxContainer = styled.div`
   display: flex;
-  flex-wrap: nowrap;
-  height: auto;
-  min-height: 60vh;
+  flex-wrap: wrap;
 `;

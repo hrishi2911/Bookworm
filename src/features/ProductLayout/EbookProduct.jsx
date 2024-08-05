@@ -3,16 +3,21 @@ import BookDetails from "../../ui/BookDetails";
 import CartButton from "../../ui/CartButton";
 import ImgBox from "../../ui/ImgBox";
 
-export default function EbookProduct({ imageURL, bookname, author, price }) {
+export default function EbookProduct({
+  productImg,
+  productName,
+  productOfferPrice,
+  productAuthor,
+}) {
   return (
     <>
       <EbookProductBox>
         <Box>
-          <ImgBox imageURL={imageURL} />
+          <ImgBox imageURL={productImg} />
           <ContentBox>
-            <BookDetails type="booktitle">{bookname}</BookDetails>
-            <BookDetails type="author">By {author}</BookDetails>
-            <BookDetails type="price">$ {price}</BookDetails>
+            <BookDetails type="booktitle">{productName}</BookDetails>
+            <BookDetails type="author">By {productAuthor}</BookDetails>
+            <BookDetails type="price">$ {productOfferPrice}</BookDetails>
             <ButtonFlex>
               <CartButton>Buy Now</CartButton>
               <CartButton>Add To Cart</CartButton>

@@ -12,7 +12,7 @@ export default function Homepage() {
         <SideMenu />
         <AppLayout />
       </Container>
-      <Footer/>
+      <Footer />
     </>
   );
 }
@@ -20,6 +20,4 @@ export default function Homepage() {
 const Container = styled.div`
   margin-top: 50px;
   display: flex;
-  height: auto;
-  min-height: 1400px;
 `;

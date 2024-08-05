@@ -61,11 +61,14 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route element={<Homepage />}>
+          <Route path="/" element={<Homepage />}>
             <Route index element={<AllProducts />} />
-            <Route path="product" element={<ProductPage />} />
-            <Route path="lendinglib" element={<LendingLibraryPage />} />
-            <Route path="EBookViewAll" element={<ViewAllContainer ebookarr={ebookarr}/>}/>
+            <Route path="/product" element={<ProductPage />} />
+            <Route path="/lendinglib" element={<LendingLibraryPage />} />
+            <Route
+              path="/EBookViewAll"
+              element={<ViewAllContainer ebookarr={ebookarr} />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>

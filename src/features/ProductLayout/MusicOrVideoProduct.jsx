@@ -3,20 +3,20 @@ import BookDetails from "../../ui/BookDetails";
 import ImgBox from "../../ui/ImgBox";
 
 export default function MusicOrVideoProduct({
-  imageURL,
-  bookname,
-  author,
-  price,
+  productImg,
+  productName,
+  productOfferPrice,
+  productAuthor,
 }) {
   return (
     <>
       <MusicVideoProductBox>
         <Box>
-          <ImgBox imageURL={imageURL} />
+          <ImgBox imageURL={productImg} />
           <ContentBox>
-            <BookDetails type="booktitle">{bookname}</BookDetails>
-            <BookDetails type="author">By {author}</BookDetails>
-            <BookDetails type="price">$ {price}</BookDetails>
+            <BookDetails type="booktitle">{productName}</BookDetails>
+            <BookDetails type="author">By {productAuthor}</BookDetails>
+            <BookDetails type="price">$ {productOfferPrice}</BookDetails>
           </ContentBox>
         </Box>
       </MusicVideoProductBox>
@@ -28,12 +28,12 @@ const MusicVideoProductBox = styled.div`
   opacity: 0px;
   margin: 0 auto;
   width: 250.45px;
-  height: 20.35px;
+  min-height: fit-content;
   gap: 0px;
 `;
 const Box = styled.div`
   width: 188px;
-  height: 288px;
+  min-height: 350px;
   gap: 0px;
   opacity: 0px;
 `;

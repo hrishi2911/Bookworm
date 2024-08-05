@@ -1,42 +1,57 @@
+import { useEffect, useState } from "react";
 import BoxTitle from "../../ui/BoxTitle";
 import EbookContainer from "./EbookContainer";
 import MusicOrVideoContainer from "./MusicOrVideoContainer";
+import { getAllProducts } from "../../services/apiProduct";
+import Spinner from "../../ui/Spinner";
 
 export default function AllProducts() {
-  const arr = [
-    {
-      imageUrl: "../ebook1.png",
-      bookname: "All the light we cannot see",
-      price: 199,
-      author: "Anthony Doerr",
-    },
-    {
-      imageUrl: "../ebook2.png",
-      bookname: "Where the Crawdads sings",
-      price: 199,
-      author: "Anthony Doerr",
-    },
-    {
-      imageUrl: "../ebook3.png",
-      bookname: "Rich People Problems",
-      price: 199,
-      author: "Anthony Doerr",
-    },
-    {
-      imageUrl: "../ebook4.png",
-      bookname: "Crazy Rich Asians",
-      price: 459,
-      author: "Kevin Kwan",
-    },
-  ];
-  
+  //   const arr = [
+  //     {
+  //       productImg: "../ebook1.png",
+  //       productName: "All the light we cannot see",
+  //       productOfferPrice: 199,
+  //       productAuthor: "Anthony Doerr",
+  //     },
+  //     {
+  //       productImg: "../ebook2.png",
+  //       productName: "Where the Crawdads sings",
+  //       productOfferPrice: 199,
+  //       productAuthor: "Anthony Doerr",
+  //     },
+  //     {
+  //       productImg: "../ebook3.png",
+  //       productName: "Rich People Problems",
+  //       productOfferPrice: 199,
+  //       productAuthor: "Anthony Doerr",
+  //     },
+  //     {
+  //       productImg: "../ebook4.png",
+  //       productName: "Crazy Rich Asians",
+  //       productOfferPrice: 459,
+  //       productAuthor: "Kevin Kwan",
+  //     },
+  //   ];
+
+  const [arr, setArr] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAllProducts();
+      setArr(data);
+      console.log(data);
+    };
+
+    fetchData();
+  }, []);
+
+  if (arr === null) return <Spinner />;
   return (
     <>
-      <BoxTitle titleName={"eBook"} />
+      <BoxTitle titleName={"eBook"} viewAll={"ebook"} />
       <EbookContainer arr={arr} />
-      <BoxTitle titleName={"Music"} />
+      <BoxTitle titleName={"Music"} viewAll={"audiobook"} />
       <MusicOrVideoContainer arr={arr} />
-      <BoxTitle titleName={"Video"} />
+      <BoxTitle titleName={"Video"} viewAll={"video"} />
       <MusicOrVideoContainer arr={arr} />
     </>
   );

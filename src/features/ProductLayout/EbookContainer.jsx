@@ -23,4 +23,5 @@ const ProductBoxContainer = styled.div`
   gap: 20px;
   column-gap: 100px;
   margin-left: 10px;
+  justify-content: space-around;
 `;

@@ -1,11 +1,16 @@
 import styled from "styled-components";
 import Button from "./Button";
+import { Link } from "react-router-dom";
 
 export default function BoxTitle({ titleName }) {
   return (
     <StyledBoxTitle>
       <Title>{titleName}</Title>
-      <Button variation="primary">View All</Button>
+      <Link to="/EBookViewAll">
+      <Button variation="primary">
+        View All
+        </Button>
+      </Link>
     </StyledBoxTitle>
   );
 }

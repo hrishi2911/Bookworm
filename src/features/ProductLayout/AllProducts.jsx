@@ -29,6 +29,7 @@ export default function AllProducts() {
       author: "Kevin Kwan",
     },
   ];
+  
   return (
     <>
       <BoxTitle titleName={"eBook"} />

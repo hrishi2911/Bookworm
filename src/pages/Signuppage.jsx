@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "../css/Signupbgimage.css";
 
@@ -8,33 +7,65 @@ export default function SignUpPage() {
     const [contactNumber, setContactNumber] = useState('');
     const [emailId, setEmailId] = useState('');
     const [password, setPassword] = useState('');
-    const [address, setAddress] = useState(''); // New state for address
-    const [occupation, setOccupation] = useState(''); // New state for occupation
+    const [address, setAddress] = useState('');
+    const [occupation, setOccupation] = useState('');
+    const [error, setError] = useState('');
     const navigate = useNavigate();
+
+    const validateEmail = (email) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
+    };
+
+    const validatePhoneNumber = (phoneNumber) => {
+        const re = /^\d{10}$/; // Example for 10 digit number validation
+        return re.test(phoneNumber);
+    };
 
     const handleSignUp = async (e) => {
         e.preventDefault();
-        const obj={userName, 
-                    contactNumber, 
-                    emailId, 
-                    password, 
-                    address, // Include address
-                    occupation}
-                    console.log(obj);
-                    
+        setError('');
+
+        if (!validateEmail(emailId)) {
+            setError('Invalid email format.');
+            return;
+        }
+
+        if (!validatePhoneNumber(contactNumber)) {
+            setError('Phone number must be a 10 digit number.');
+            return;
+        }
+
+        const obj = {
+            userName,
+            contactNumber,
+            emailId,
+            password,
+            address,
+            occupation
+        };
+        console.log(obj);
+
         try {
-            await axios.post('http://localhost:8080/signup', { 
-                userName, 
-                contactNumber, 
-                emailId, 
-                password, 
-                address, // Include address
-                occupation // Include occupation
+            const response = await fetch('http://localhost:8080/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(obj)
             });
-            console.log('Sign-up successful');
-            navigate('/login'); // Redirect to login page
+
+            if (response.ok) {
+                console.log('Sign-up successful');
+                navigate('/login');
+            } else {
+                const errorData = await response.json();
+                console.error('Sign-up failed:', errorData);
+                setError(errorData.message || 'Sign-up failed');
+            }
         } catch (error) {
-            console.error('Sign-up failed:', error.response ? error.response.data : error.message);
+            console.error('Sign-up failed:', error.message);
+            setError('Sign-up failed');
         }
     };
 
@@ -43,6 +74,7 @@ export default function SignUpPage() {
             <form className='formcss' onSubmit={handleSignUp}>
                 <h2 className='poppins-semibold'>Sign Up Account</h2>
                 <br />
+                {error && <p style={{ color: 'red' }}>{error}</p>}
                 <div>
                     <input 
                         type="text" 

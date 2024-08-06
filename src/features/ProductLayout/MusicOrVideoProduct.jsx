@@ -3,6 +3,7 @@ import BookDetails from "../../ui/BookDetails";
 import ImgBox from "../../ui/ImgBox";
 import { MdLibraryMusic } from "react-icons/md";
 import { BiSolidVideos } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 export default function MusicOrVideoProduct({
   productImg,
@@ -10,12 +11,20 @@ export default function MusicOrVideoProduct({
   productOfferPrice,
   productAuthor,
   productType,
+  productId,
 }) {
+  const Navigate = useNavigate();
+  function showProductDetails(productId) {
+    Navigate(`/product/${productId}`);
+  }
   return (
     <>
       <MusicVideoProductBox>
         <Box>
-          <ImgBox imageURL={productImg} />
+          <ImgBox
+            imageURL={productImg}
+            onClick={() => showProductDetails(productId)}
+          />
           {productType.typeDesc === "AUDIOBOOK" ? (
             <MdLibraryMusic style={{ position: "absolute", top: "10px" }} />
           ) : productType.typeDesc === "VIDEO" ? (

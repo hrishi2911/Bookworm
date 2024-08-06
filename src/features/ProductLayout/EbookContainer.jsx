@@ -8,7 +8,13 @@ export default function EbookContainer({ arr }) {
         .filter((product, index) => index < 4)
         .map(
           (
-            { productImg, productName, productOfferPrice, productAuthor },
+            {
+              productImg,
+              productName,
+              productOfferPrice,
+              productAuthor,
+              productId,
+            },
             index
           ) => (
             <EbookProduct
@@ -17,6 +23,7 @@ export default function EbookContainer({ arr }) {
               productName={productName}
               productOfferPrice={productOfferPrice}
               productAuthor={productAuthor}
+              productId={productId}
             />
           )
         )}

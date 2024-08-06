@@ -2,18 +2,28 @@ import styled from "styled-components";
 import BookDetails from "../../ui/BookDetails";
 import CartButton from "../../ui/CartButton";
 import ImgBox from "../../ui/ImgBox";
+import { useNavigate } from "react-router-dom";
 
 export default function EbookProduct({
   productImg,
   productName,
   productOfferPrice,
   productAuthor,
+  productId,
 }) {
+  const Navigate = useNavigate();
+
+  function showProductDetails(productId) {
+    Navigate(`/product/${productId}`);
+  }
   return (
     <>
       <EbookProductBox>
         <Box>
-          <ImgBox imageURL={productImg} />
+          <ImgBox
+            imageURL={productImg}
+            onClick={() => showProductDetails(productId)}
+          />
           <ContentBox>
             <BookDetails type="booktitle">{productName}</BookDetails>
             <BookDetails type="author">By {productAuthor}</BookDetails>

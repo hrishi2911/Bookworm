@@ -7,6 +7,7 @@ import AllProducts from "./features/ProductLayout/AllProducts";
 import ViewAllContainer from "./features/ProductLayout/ViewAll";
 import SignUpPage from "./pages/Signuppage";
 import SignInPage from "./pages/Signinpage";
+import InvoicePage from "./features/Invoice/InvoicePage";
 
 function App() {
   const ebookarr = [
@@ -70,8 +71,10 @@ function App() {
             <Route
               path="/EBookViewAll"
               element={<ViewAllContainer ebookarr={ebookarr} />}
+          
             />
           </Route>
+          <Route path="/cart" element={<InvoicePage />}/>
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<SignInPage/>} />
         </Routes>

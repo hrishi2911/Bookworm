@@ -1,8 +1,4 @@
 /* General styling */
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-}
 
 h1 {
   font-size: 2rem;
@@ -49,13 +45,12 @@ button.btn-secondary {
   margin-bottom: 0.5rem;
 }
 
-.btn1{
+.btn1 {
   align-items: center;
   width: 479px;
   height: 50px;
   left: 87.5px;
   top: 611px;
-
 }
 
 /* Section spacing */
@@ -92,10 +87,6 @@ button.btn-secondary {
   display: block;
   font-weight: bold;
   margin-bottom: 0.25rem;
-}
-.container {
-  max-width: 800px;
-  margin: 0 auto;
 }
 
 .book-info {
@@ -144,7 +135,8 @@ button.btn-secondary {
   margin-left: 7rem;
 }
 
-.buy-now, .add-to-cart {
+.buy-now,
+.add-to-cart {
   padding: 0.5rem 1.5rem;
   font-size: 1rem;
 }

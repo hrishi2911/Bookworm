@@ -8,6 +8,7 @@ import ViewAllContainer from "./features/ProductLayout/ViewAll";
 import SignUpPage from "./pages/Signuppage";
 import SignInPage from "./pages/Signinpage";
 import InvoicePage from "./features/Invoice/InvoicePage";
+import BookpageInfo from "./features/ProductDetails/BookpageInfo";
 
 function App() {
   const ebookarr = [
@@ -67,16 +68,16 @@ function App() {
           <Route path="/" element={<Homepage />}>
             <Route index element={<AllProducts />} />
             <Route path="/product" element={<ProductPage />} />
+            <Route path="/product/:productId" element={<BookpageInfo />} />
             <Route path="/lendinglib" element={<LendingLibraryPage />} />
             <Route
               path="/EBookViewAll"
               element={<ViewAllContainer ebookarr={ebookarr} />}
-          
             />
           </Route>
-          <Route path="/cart" element={<InvoicePage />}/>
+          <Route path="/cart" element={<InvoicePage />} />
           <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/login" element={<SignInPage/>} />
+          <Route path="/login" element={<SignInPage />} />
         </Routes>
       </BrowserRouter>
     </>

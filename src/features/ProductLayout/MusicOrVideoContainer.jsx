@@ -14,6 +14,7 @@ export default function MusicOrVideoContainer({ arr }) {
               productOfferPrice,
               productAuthor,
               productType,
+              productId,
             },
             index
           ) => (
@@ -24,6 +25,7 @@ export default function MusicOrVideoContainer({ arr }) {
               productOfferPrice={productOfferPrice}
               productAuthor={productAuthor}
               productType={productType}
+              productId={productId}
             />
           )
         )}

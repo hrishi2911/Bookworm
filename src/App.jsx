@@ -5,6 +5,8 @@ import ProductPage from "./pages/ProductPage";
 import LendingLibraryPage from "./pages/LendingLibraryPage";
 import AllProducts from "./features/ProductLayout/AllProducts";
 import ViewAllContainer from "./features/ProductLayout/ViewAll";
+import SignUpPage from "./pages/Signuppage";
+import SignInPage from "./pages/Signinpage";
 
 function App() {
   const ebookarr = [
@@ -70,6 +72,8 @@ function App() {
               element={<ViewAllContainer ebookarr={ebookarr} />}
             />
           </Route>
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/login" element={<SignInPage/>} />
         </Routes>
       </BrowserRouter>
     </>

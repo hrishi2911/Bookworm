@@ -1,7 +1,18 @@
 import styled from "styled-components";
 import LogButton from "../../ui/LogButton";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 function HomepageLayout() {
-  const isLoggedIn = true;
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const navigate=useNavigate()
+  const handleLogout = () => {
+    // Clear authentication tokens or data
+    setIsLoggedIn(false);
+    // Optionally, redirect to login page
+    navigate('/login') // Redirect to login page after logout
+  };
+
 
   return (
     <>
@@ -15,11 +26,15 @@ function HomepageLayout() {
               </h3>
             </div>
             <div>
-              {isLoggedIn ? (
+            {isLoggedIn ? (
+              <button onClick={handleLogout}>
                 <LogButton value="Log Out" />
-              ) : (
+              </button>
+            ) : (
+              <Link to="/login">
                 <LogButton value="Log In" />
-              )}
+              </Link>
+            )}
             </div>
           </Head1>
           <Head2>

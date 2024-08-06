@@ -6,27 +6,9 @@ export default function EbookContainer({ arr }) {
     <ProductBoxContainer>
       {arr
         .filter((product, index) => index < 4)
-        .map(
-          (
-            {
-              productImg,
-              productName,
-              productOfferPrice,
-              productAuthor,
-              productId,
-            },
-            index
-          ) => (
-            <EbookProduct
-              key={index}
-              productImg={"../" + productImg}
-              productName={productName}
-              productOfferPrice={productOfferPrice}
-              productAuthor={productAuthor}
-              productId={productId}
-            />
-          )
-        )}
+        .map((product, index) => (
+          <EbookProduct key={index} product={product} />
+        ))}
     </ProductBoxContainer>
   );
 }

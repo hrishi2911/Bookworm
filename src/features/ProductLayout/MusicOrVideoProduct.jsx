@@ -5,15 +5,18 @@ import { MdLibraryMusic } from "react-icons/md";
 import { BiSolidVideos } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
-export default function MusicOrVideoProduct({
-  productImg,
-  productName,
-  productOfferPrice,
-  productAuthor,
-  productType,
-  productId,
-}) {
+export default function MusicOrVideoProduct({ product }) {
   const Navigate = useNavigate();
+
+  const {
+    productImg,
+    productName,
+    productOfferPrice,
+    productAuthor,
+    productType: { typeDesc },
+    productId,
+  } = product;
+
   function showProductDetails(productId) {
     Navigate(`/product/${productId}`);
   }
@@ -25,9 +28,9 @@ export default function MusicOrVideoProduct({
             imageURL={productImg}
             onClick={() => showProductDetails(productId)}
           />
-          {productType.typeDesc === "AUDIOBOOK" ? (
+          {typeDesc === "AUDIOBOOK" ? (
             <MdLibraryMusic style={{ position: "absolute", top: "10px" }} />
-          ) : productType.typeDesc === "VIDEO" ? (
+          ) : typeDesc === "VIDEO" ? (
             <BiSolidVideos style={{ position: "absolute", top: "10px" }} />
           ) : (
             ""

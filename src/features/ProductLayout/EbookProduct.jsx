@@ -3,19 +3,37 @@ import BookDetails from "../../ui/BookDetails";
 import CartButton from "../../ui/CartButton";
 import ImgBox from "../../ui/ImgBox";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addItem } from "../Cart/cartSlice";
 
-export default function EbookProduct({
-  productImg,
-  productName,
-  productOfferPrice,
-  productAuthor,
-  productId,
-}) {
+export default function EbookProduct({ product }) {
   const Navigate = useNavigate();
-
+  const {
+    productImg,
+    productName,
+    productOfferPrice,
+    productAuthor,
+    productId,
+    productIsbn,
+    productType: { productDesc },
+  } = product;
   function showProductDetails(productId) {
     Navigate(`/product/${productId}`);
   }
+
+  const dispatch = useDispatch();
+
+  function handleAddtoCart() {
+    const newItem = {
+      productId,
+      productIsbn,
+      productName,
+      unitPrice: productOfferPrice,
+      productType: productDesc,
+    };
+    dispatch(addItem(newItem));
+  }
+
   return (
     <>
       <EbookProductBox>
@@ -30,7 +48,7 @@ export default function EbookProduct({
             <BookDetails type="price">$ {productOfferPrice}</BookDetails>
             <ButtonFlex>
               <CartButton>Buy Now</CartButton>
-              <CartButton>Add To Cart</CartButton>
+              <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton>
             </ButtonFlex>
           </ContentBox>
         </Box>

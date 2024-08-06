@@ -2,17 +2,17 @@ import styled from "styled-components";
 import LogButton from "../../ui/LogButton";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import CartOverview from "../Cart/CartOverview";
 
 function HomepageLayout() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-const navigate=useNavigate()
+  const navigate = useNavigate();
   const handleLogout = () => {
     // Clear authentication tokens or data
     setIsLoggedIn(false);
     // Optionally, redirect to login page
-    navigate('/login') // Redirect to login page after logout
+    navigate("/login"); // Redirect to login page after logout
   };
-
 
   return (
     <>
@@ -25,16 +25,23 @@ const navigate=useNavigate()
                 Book<span>Worm</span>
               </h3>
             </div>
-            <div>
-            {isLoggedIn ? (
-              <button onClick={handleLogout}>
-                <LogButton value="Log Out" />
-              </button>
-            ) : (
-              <Link to="/login">
-                <LogButton value="Log In" />
-              </Link>
-            )}
+            <div
+              style={{
+                display: "flex",
+                gap: "30px",
+                alignItems: "center",
+              }}
+            >
+              <CartOverview />
+              {isLoggedIn ? (
+                <button onClick={handleLogout}>
+                  <LogButton value="Log Out" />
+                </button>
+              ) : (
+                <Link to="/login">
+                  <LogButton value="Log In" />
+                </Link>
+              )}
             </div>
           </Head1>
           <Head2>

@@ -6,29 +6,9 @@ export default function MusicOrVideoContainer({ arr }) {
     <ProductBoxContainer>
       {arr
         .filter((product, index) => index < 3)
-        .map(
-          (
-            {
-              productImg,
-              productName,
-              productOfferPrice,
-              productAuthor,
-              productType,
-              productId,
-            },
-            index
-          ) => (
-            <MusicOrVideoProduct
-              key={index}
-              productImg={productImg}
-              productName={productName}
-              productOfferPrice={productOfferPrice}
-              productAuthor={productAuthor}
-              productType={productType}
-              productId={productId}
-            />
-          )
-        )}
+        .map((product, index) => (
+          <MusicOrVideoProduct key={index} product={product} />
+        ))}
     </ProductBoxContainer>
   );
 }

@@ -33,26 +33,36 @@ export default function AllProducts() {
   //     },
   //   ];
 
-  const [arr, setArr] = useState(null);
+  const [ebookList, setEbookList] = useState(null);
+  const [audioList, setAudioList] = useState(null);
+  const [videoList, setVideoList] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       const data = await getAllProducts();
-      setArr(data);
+      setEbookList(
+        data.filter((product) => product.productType.typeDesc === "EBOOK")
+      );
+      setAudioList(
+        data.filter((product) => product.productType.typeDesc === "AUDIOBOOK")
+      );
+      setVideoList(
+        data.filter((product) => product.productType.typeDesc === "VIDEO")
+      );
       console.log(data);
     };
 
     fetchData();
   }, []);
 
-  if (arr === null) return <Spinner />;
+  if (ebookList === null) return <Spinner />;
   return (
     <>
       <BoxTitle titleName={"eBook"} viewAll={"ebook"} />
-      <EbookContainer arr={arr} />
+      <EbookContainer arr={ebookList} />
       <BoxTitle titleName={"Music"} viewAll={"audiobook"} />
-      <MusicOrVideoContainer arr={arr} />
+      <MusicOrVideoContainer arr={audioList} />
       <BoxTitle titleName={"Video"} viewAll={"video"} />
-      <MusicOrVideoContainer arr={arr} />
+      <MusicOrVideoContainer arr={videoList} />
     </>
   );
 }

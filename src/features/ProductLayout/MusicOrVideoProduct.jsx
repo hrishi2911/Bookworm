@@ -1,18 +1,28 @@
 import styled from "styled-components";
 import BookDetails from "../../ui/BookDetails";
 import ImgBox from "../../ui/ImgBox";
+import { MdLibraryMusic } from "react-icons/md";
+import { BiSolidVideos } from "react-icons/bi";
 
 export default function MusicOrVideoProduct({
   productImg,
   productName,
   productOfferPrice,
   productAuthor,
+  productType,
 }) {
   return (
     <>
       <MusicVideoProductBox>
         <Box>
           <ImgBox imageURL={productImg} />
+          {productType.typeDesc === "AUDIOBOOK" ? (
+            <MdLibraryMusic style={{ position: "absolute", top: "10px" }} />
+          ) : productType.typeDesc === "VIDEO" ? (
+            <BiSolidVideos style={{ position: "absolute", top: "10px" }} />
+          ) : (
+            ""
+          )}
           <ContentBox>
             <BookDetails type="booktitle">{productName}</BookDetails>
             <BookDetails type="author">By {productAuthor}</BookDetails>
@@ -36,6 +46,8 @@ const Box = styled.div`
   min-height: 350px;
   gap: 0px;
   opacity: 0px;
+  display: inline-block;
+  position: relative;
 `;
 // const ImgBox = styled.img`
 //   width: 100%;

@@ -1,4 +1,3 @@
-import React from "react";
 import styled, { keyframes } from "styled-components";
 
 export default function ImgBox({ imageURL }) {
@@ -13,6 +12,7 @@ const scaleUp = keyframes`
   }
 `;
 const StyledImgBox = styled.img`
+  display: block;
   height: 211px;
   padding: 20px;
   object-fit: fit;

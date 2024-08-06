@@ -8,7 +8,13 @@ export default function MusicOrVideoContainer({ arr }) {
         .filter((product, index) => index < 3)
         .map(
           (
-            { productImg, productName, productOfferPrice, productAuthor },
+            {
+              productImg,
+              productName,
+              productOfferPrice,
+              productAuthor,
+              productType,
+            },
             index
           ) => (
             <MusicOrVideoProduct
@@ -17,6 +23,7 @@ export default function MusicOrVideoContainer({ arr }) {
               productName={productName}
               productOfferPrice={productOfferPrice}
               productAuthor={productAuthor}
+              productType={productType}
             />
           )
         )}

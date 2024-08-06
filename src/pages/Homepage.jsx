@@ -9,7 +9,7 @@ export default function Homepage() {
   return (
     <>
       <HomepageLayout />
-      <FilterComponent/>
+      <FilterComponent />
       <Container>
         <SideMenu />
         <AppLayout />
@@ -20,6 +20,6 @@ export default function Homepage() {
 }
 
 const Container = styled.div`
-  margin-top: 50px;
+  margin-top: 20px;
   display: flex;
 `;

@@ -3,21 +3,21 @@ import { useNavigate } from 'react-router-dom';
 import "../css/Signupbgimage.css";
 
 export default function SignInPage() {
-    const [emailId, setEmailId] = useState('');
-    const [password, setPassword] = useState('');
+    const [customerEmail, setcustomerEmail] = useState('');
+    const [customerPassword, setcustomerPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const validateEmail = (email) => {
+    const validateEmail = (customerEmail) => {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(String(email).toLowerCase());
+        return re.test(String(customerEmail).toLowerCase());
     };
 
     const handleSignIn = async (e) => {
         e.preventDefault();
         setError('');
 
-        if (!validateEmail(emailId)) {
+        if (!validateEmail(customerEmail)) {
             setError('Invalid email format.');
             return;
         }
@@ -28,7 +28,7 @@ export default function SignInPage() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ customerEmail: emailId, customerPassword: password })
+                body: JSON.stringify({ customerEmail, customerPassword })
             });
 
             if (response.ok) {
@@ -57,10 +57,10 @@ export default function SignInPage() {
                 <div>
                     <input
                         type="email"
-                        id="emailId"
-                        value={emailId}
-                        onChange={(e) => setEmailId(e.target.value)}
-                        name="emailId"
+                        id="customerEmail"
+                        value={customerEmail}
+                        onChange={(e) => setcustomerEmail(e.target.value)}
+                        name="customerEmail"
                         placeholder='Email'
                         required
                     />
@@ -69,10 +69,10 @@ export default function SignInPage() {
                 <div>
                     <input
                         type="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        name="password"
+                        id="customerPassword"
+                        value={customerPassword}
+                        onChange={(e) => setcustomerPassword(e.target.value)}
+                        name="customerPassword"
                         placeholder='Password'
                         required
                     />

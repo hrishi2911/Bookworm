@@ -66,7 +66,6 @@ export default function EbookProduct({ product }) {
             <BookDetails type="author">By {productAuthor}</BookDetails>
             <BookDetails type="price">$ {productOfferPrice}</BookDetails>
             <ButtonFlex>
-              <CartButton>Buy Now</CartButton>
               {isInCart && (
                 <div>
                   <DeleteProduct productId={productId} />

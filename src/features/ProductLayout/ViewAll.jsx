@@ -6,8 +6,8 @@ import { useSearchParams } from "react-router-dom";
 import Spinner from "../../ui/Spinner";
 import BoxTitle from "../../ui/BoxTitle";
 
-export default function ViewAllContainer() {
-  const [arr, setArr] = useState(null);
+export default function ViewAllContainer({ searchTerm }) {
+  const [products, setProducts] = useState(null);
   const [searchParams] = useSearchParams();
   const viewAllProductType = searchParams.get("type");
   console.log(viewAllProductType);
@@ -19,20 +19,34 @@ export default function ViewAllContainer() {
         (product) =>
           product.productType.typeDesc === viewAllProductType.toUpperCase()
       );
-      setArr(filterData);
+      setProducts(filterData);
       console.log(data);
     };
 
     fetchData();
   }, [viewAllProductType]);
 
-  if (arr === null) return <Spinner />;
-  if (arr.length === 0) return <div>No more {viewAllProductType}</div>;
+  const filterProducts = (products) => {
+    if (!searchTerm) return products;
+    return products.filter(
+      (product) =>
+        product.productName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.productAuthor
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
+        product.productIsbn.includes(searchTerm)
+    );
+  };
+
+  if (products === null) return <Spinner />;
+  if (products.length === 0) return <div>No more {viewAllProductType}</div>;
+
+  const filteredEbooks = filterProducts(products);
   return (
     <>
       <BoxTitle titleName={viewAllProductType} showViewAll={false} />
       <ViewAllBoxContainer>
-        {arr.map((product, index) => (
+        {filteredEbooks.map((product, index) => (
           <EbookProduct key={index} product={product} />
         ))}
       </ViewAllBoxContainer>

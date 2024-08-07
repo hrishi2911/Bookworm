@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import "./InvoicePage.css"; // Custom CSS for specific styles
 import { useSelector } from "react-redux";
 import { getCart } from "../Cart/cartSlice";
@@ -38,7 +39,9 @@ const Invoice = () => {
               <th className="w-2/12 border px-4 py-2">ISBN</th>
               <th className="w-2/12 border px-4 py-2">Product Type</th>
               <th className="w-3/12 border px-4 py-2">Title</th>
+              <th className="w-2/12 border px-4 py-2">Purchase Type</th>
               <th className="w-2/12 border px-4 py-2">Price</th>
+
               <th className="w-1/12 border px-4 py-2">Remove?</th>
             </tr>
           </thead>
@@ -108,14 +111,21 @@ const Invoice = () => {
 };
 
 function TableRow({ product }) {
-  const { productId, productIsbn, productName, unitPrice, productType } =
-    product;
+  const {
+    productId,
+    productIsbn,
+    productName,
+    unitPrice,
+    productType,
+    purchaseType,
+  } = product;
   return (
     <tr>
       <td className="border px-4 py-2">{productId}</td>
       <td className="border px-4 py-2">{productIsbn}</td>
       <td className="border px-4 py-2">{productType}</td>
       <td className="border px-4 py-2">{productName}</td>
+      <td className="border px-4 py-2">{purchaseType}</td>
       <td className="border px-4 py-2">{unitPrice}</td>
       <td className="border px-4 py-2 text-center">
         <DeleteProduct productId={productId} />

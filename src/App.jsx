@@ -9,70 +9,27 @@ import SignUpPage from "./pages/Signuppage";
 import SignInPage from "./pages/Signinpage";
 import InvoicePage from "./features/Invoice/InvoicePage";
 import BookpageInfo from "./features/ProductDetails/BookpageInfo";
+import { useState } from "react";
 
 function App() {
-  const ebookarr = [
-    {
-      imageUrl: "../ebook1.png",
-      bookname: "All the light we cannot see",
-      price: 199,
-      author: "Anthony Doerr",
-    },
-    {
-      imageUrl: "../ebook2.png",
-      bookname: "Where the Crawdads sings",
-      price: 199,
-      author: "Anthony Doerr",
-    },
-    {
-      imageUrl: "../ebook3.png",
-      bookname: "Rich People Problems",
-      price: 199,
-      author: "Anthony Doerr",
-    },
-    {
-      imageUrl: "../ebook4.png",
-      bookname: "Crazy Rich Asians",
-      price: 459,
-      author: "Kevin Kwan",
-    },
-    {
-      imageUrl: "../ebook1.png",
-      bookname: "All the light we cannot see",
-      price: 199,
-      author: "Anthony Doerr",
-    },
-    {
-      imageUrl: "../ebook2.png",
-      bookname: "Where the Crawdads sings",
-      price: 199,
-      author: "Anthony Doerr",
-    },
-    {
-      imageUrl: "../ebook3.png",
-      bookname: "Rich People Problems",
-      price: 199,
-      author: "Anthony Doerr",
-    },
-    {
-      imageUrl: "../ebook4.png",
-      bookname: "Crazy Rich Asians",
-      price: 459,
-      author: "Kevin Kwan",
-    },
-  ];
+  const [searchTerm, setSearchTerm] = useState("");
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Homepage />}>
-            <Route index element={<AllProducts />} />
+          <Route
+            path="/"
+            element={
+              <Homepage setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+            }
+          >
+            <Route index element={<AllProducts searchTerm={searchTerm} />} />
             <Route path="/product" element={<ProductPage />} />
             <Route path="/product/:productId" element={<BookpageInfo />} />
             <Route path="/lendinglib" element={<LendingLibraryPage />} />
             <Route
               path="/EBookViewAll"
-              element={<ViewAllContainer ebookarr={ebookarr} />}
+              element={<ViewAllContainer searchTerm={searchTerm} />}
             />
           </Route>
           <Route path="/cart" element={<InvoicePage />} />

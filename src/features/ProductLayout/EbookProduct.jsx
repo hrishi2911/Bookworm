@@ -3,11 +3,11 @@ import BookDetails from "../../ui/BookDetails";
 import CartButton from "../../ui/CartButton";
 import ImgBox from "../../ui/ImgBox";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addItem } from "../Cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, isPresentInCart } from "../Cart/cartSlice";
+import DeleteProduct from "./DeleteProduct";
 
 export default function EbookProduct({ product }) {
-  const Navigate = useNavigate();
   const {
     productImg,
     productName,
@@ -15,13 +15,18 @@ export default function EbookProduct({ product }) {
     productAuthor,
     productId,
     productIsbn,
-    productType: { productDesc },
+    productType: { typeDesc },
   } = product;
+
+  const Navigate = useNavigate();
+  const currQuantity = useSelector(isPresentInCart(productId));
+  const isInCart = currQuantity > 0;
+  console.log(isInCart);
+  const dispatch = useDispatch();
+
   function showProductDetails(productId) {
     Navigate(`/product/${productId}`);
   }
-
-  const dispatch = useDispatch();
 
   function handleAddtoCart() {
     const newItem = {
@@ -29,7 +34,7 @@ export default function EbookProduct({ product }) {
       productIsbn,
       productName,
       unitPrice: productOfferPrice,
-      productType: productDesc,
+      productType: typeDesc,
     };
     dispatch(addItem(newItem));
   }
@@ -48,7 +53,15 @@ export default function EbookProduct({ product }) {
             <BookDetails type="price">$ {productOfferPrice}</BookDetails>
             <ButtonFlex>
               <CartButton>Buy Now</CartButton>
-              <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton>
+              {isInCart && (
+                <div>
+                  <DeleteProduct productId={productId} />
+                </div>
+              )}
+              {!isInCart && (
+                <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton>
+              )}
+              {/* <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton> */}
             </ButtonFlex>
           </ContentBox>
         </Box>

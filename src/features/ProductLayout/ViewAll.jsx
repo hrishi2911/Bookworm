@@ -32,20 +32,9 @@ export default function ViewAllContainer() {
     <>
       <BoxTitle titleName={viewAllProductType} showViewAll={false} />
       <ViewAllBoxContainer>
-        {arr.map(
-          (
-            { productImg, productName, productOfferPrice, productAuthor },
-            index
-          ) => (
-            <EbookProduct
-              key={index}
-              productImg={"../" + productImg}
-              productName={productName}
-              productOfferPrice={productOfferPrice}
-              productAuthor={productAuthor}
-            />
-          )
-        )}
+        {arr.map((product, index) => (
+          <EbookProduct key={index} product={product} />
+        ))}
       </ViewAllBoxContainer>
     </>
   );

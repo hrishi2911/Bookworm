@@ -5,10 +5,10 @@ import AppLayout from "./AppLayout";
 import Footer from "../features/Homepage/Footer";
 import FilterComponent from "../features/Homepage/Filter";
 
-export default function Homepage() {
+export default function Homepage({ searchTerm, setSearchTerm }) {
   return (
     <>
-      <HomepageLayout />
+      <HomepageLayout setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
       <FilterComponent />
       <Container>
         <SideMenu />

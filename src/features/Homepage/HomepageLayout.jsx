@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import CartOverview from "../Cart/CartOverview";
 
-function HomepageLayout() {
+function HomepageLayout({ searchTerm, setSearchTerm }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -12,6 +12,10 @@ function HomepageLayout() {
     setIsLoggedIn(false);
     // Optionally, redirect to login page
     navigate("/login"); // Redirect to login page after logout
+  };
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
   };
 
   return (
@@ -46,7 +50,11 @@ function HomepageLayout() {
             <h1>YOUR NEXT ADVENTURE IS JUST A CLICK AWAY !</h1>
           </Head2>
           <Head3>
-            <input placeholder="Search by book name,author or isbn" />
+            <input
+              placeholder="Search by book name, author or isbn"
+              value={searchTerm}
+              onChange={handleSearch}
+            />
           </Head3>
           <Head4>
             <div>

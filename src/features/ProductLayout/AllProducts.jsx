@@ -5,7 +5,7 @@ import MusicOrVideoContainer from "./MusicOrVideoContainer";
 import { getAllProducts } from "../../services/apiProduct";
 import Spinner from "../../ui/Spinner";
 
-export default function AllProducts() {
+export default function AllProducts({ searchTerm }) {
   //   const arr = [
   //     {
   //       productImg: "../ebook1.png",
@@ -54,15 +54,31 @@ export default function AllProducts() {
     fetchData();
   }, []);
 
+  const filterProducts = (products) => {
+    if (!searchTerm) return products;
+    return products.filter(
+      (product) =>
+        product.productName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.productAuthor
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
+        product.productIsbn.includes(searchTerm)
+    );
+  };
+
   if (ebookList === null) return <Spinner />;
+
+  const filteredEbooks = filterProducts(ebookList);
+  const filteredAudiobooks = filterProducts(audioList);
+  const filteredVideos = filterProducts(videoList);
   return (
     <>
       <BoxTitle titleName={"eBook"} viewAll={"ebook"} />
-      <EbookContainer arr={ebookList} />
+      <EbookContainer arr={filteredEbooks} />
       <BoxTitle titleName={"Music"} viewAll={"audiobook"} />
-      <MusicOrVideoContainer arr={audioList} />
+      <MusicOrVideoContainer arr={filteredAudiobooks} />
       <BoxTitle titleName={"Video"} viewAll={"video"} />
-      <MusicOrVideoContainer arr={videoList} />
+      <MusicOrVideoContainer arr={filteredVideos} />
     </>
   );
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './Logo.png';
 import './InvoicePage.css'; // Custom CSS for specific styles
 
 const InvoicePage = () => {
@@ -15,7 +14,7 @@ const Header = () => {
   return (
     <header className="header bg-blue-500 text-white p-4 flex justify-between items-center">
       <div className="container">
-      <img src={logo} alt="Main Logo" id="Logocss"/><h2 id='ca'>Cart</h2>
+      <img src={'./public/Logo.png'} alt="Main Logo" id="CartLogocss"/><h2 id='ca'>Cart</h2>
       {/* <FontAwesomeIcon id='fa' icon={faArrowLeft} />
          */}
       </div>
@@ -51,7 +50,7 @@ const Invoice = () => {
           </tr>
         </tbody>
       </table>
-      <div class="vspace1em"></div>
+      <div className="vspace1em"></div>
       <hr />
       <div class="vspace1em"></div>
       <div id ="dv1" class='detailrow'>

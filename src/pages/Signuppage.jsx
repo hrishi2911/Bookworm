@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import "../css/Signupbgimage.css";
 
 export default function SignUpPage() {
-    const [userName, setUserName] = useState('');
-    const [contactNumber, setContactNumber] = useState('');
-    const [emailId, setEmailId] = useState('');
-    const [password, setPassword] = useState('');
-    const [address, setAddress] = useState('');
-    const [occupation, setOccupation] = useState('');
+    const [customerName, setcustomerName] = useState('');
+    const [customerPhone, setcustomerPhone] = useState('');
+    const [customerEmail, setcustomerEmail] = useState('');
+    const [customerPassword, setCustomerPassword] = useState('');
+    const [customerAddress, setAddress] = useState('');
+    const [customerOccupation, setcustomerOccupation] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
@@ -26,23 +26,24 @@ export default function SignUpPage() {
         e.preventDefault();
         setError('');
 
-        if (!validateEmail(emailId)) {
+        if (!validateEmail(customerEmail)) {
             setError('Invalid email format.');
             return;
         }
 
-        if (!validatePhoneNumber(contactNumber)) {
+        if (!validatePhoneNumber(customerPhone)) {
             setError('Phone number must be a 10 digit number.');
             return;
         }
 
         const obj = {
-            userName,
-            contactNumber,
-            emailId,
-            password,
-            address,
-            occupation
+            customerName,
+            customerPhone,
+            customerEmail,
+            customerPassword,
+            customerAddress,
+            customerOccupation
+            
         };
         console.log(obj);
 
@@ -78,11 +79,11 @@ export default function SignUpPage() {
                 <div>
                     <input 
                         type="text" 
-                        id="userName" 
-                        value={userName} 
-                        onChange={(e) => setUserName(e.target.value)} 
-                        name="userName" 
-                        placeholder='UserName' 
+                        id="customerName" 
+                        value={customerName} 
+                        onChange={(e) => setcustomerName(e.target.value)} 
+                        name="customerName" 
+                        placeholder='customerName' 
                         required 
                     />
                 </div>
@@ -90,10 +91,10 @@ export default function SignUpPage() {
                 <div>
                     <input 
                         type="text" 
-                        id="contactNumber" 
-                        value={contactNumber} 
-                        onChange={(e) => setContactNumber(e.target.value)} 
-                        name="contactNumber" 
+                        id="customerPhone" 
+                        value={customerPhone} 
+                        onChange={(e) => setcustomerPhone(e.target.value)} 
+                        name="customerPhone" 
                         placeholder='Phone Number' 
                         required 
                     />
@@ -102,34 +103,34 @@ export default function SignUpPage() {
                 <div>
                     <input 
                         type="email" 
-                        id="emailId" 
-                        value={emailId} 
-                        onChange={(e) => setEmailId(e.target.value)} 
-                        name="emailId" 
+                        id="customerEmail" 
+                        value={customerEmail} 
+                        onChange={(e) => setcustomerEmail(e.target.value)} 
+                        name="customerEmail" 
                         placeholder='Email' 
                         required 
                     />
                 </div>
                 <br />
                 <div>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        value={password} 
-                        onChange={(e) => setPassword(e.target.value)} 
-                        name="password" 
-                        placeholder='Password' 
-                        required 
-                    />
-                </div>
+                <input 
+                    type="password" 
+                    id="customerPassword" 
+                    value={customerPassword} 
+                    onChange={(e) => setCustomerPassword(e.target.value)} 
+                    name="customerPassword" 
+                    placeholder='Password' 
+                    required 
+                />
+            </div>
                 <br />
                 <div>
                     <input 
                         type="text" 
-                        id="address" 
-                        value={address} 
+                        id="customerAddress" 
+                        value={customerAddress} 
                         onChange={(e) => setAddress(e.target.value)} 
-                        name="address" 
+                        name="customerAddress" 
                         placeholder='Address' 
                         required 
                     />
@@ -138,11 +139,11 @@ export default function SignUpPage() {
                 <div>
                     <input 
                         type="text" 
-                        id="occupation" 
-                        value={occupation} 
-                        onChange={(e) => setOccupation(e.target.value)} 
-                        name="occupation" 
-                        placeholder='Occupation' 
+                        id="customerOccupation" 
+                        value={customerOccupation} 
+                        onChange={(e) => setcustomerOccupation(e.target.value)} 
+                        name="customerOccupation" 
+                        placeholder='customerOccupation' 
                         required 
                     />
                 </div>

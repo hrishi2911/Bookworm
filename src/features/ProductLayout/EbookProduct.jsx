@@ -15,14 +15,15 @@ export default function EbookProduct({ product }) {
     productAuthor,
     productId,
     productIsbn,
+    rentable,
     productType: { typeDesc },
   } = product;
 
   const Navigate = useNavigate();
   const currQuantity = useSelector(isPresentInCart(productId));
   const isInCart = currQuantity > 0;
-  console.log(isInCart);
   const dispatch = useDispatch();
+  console.log(rentable);
 
   function showProductDetails(productId) {
     Navigate(`/product/${productId}`);
@@ -35,6 +36,19 @@ export default function EbookProduct({ product }) {
       productName,
       unitPrice: productOfferPrice,
       productType: typeDesc,
+      purchaseType: "PURCHASE",
+    };
+    dispatch(addItem(newItem));
+  }
+
+  function handleAddtoCartRent() {
+    const newItem = {
+      productId,
+      productIsbn,
+      productName,
+      unitPrice: productOfferPrice,
+      productType: typeDesc,
+      purchaseType: "RENT",
     };
     dispatch(addItem(newItem));
   }
@@ -60,6 +74,9 @@ export default function EbookProduct({ product }) {
               )}
               {!isInCart && (
                 <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton>
+              )}
+              {!isInCart && rentable && (
+                <CartButton onClick={handleAddtoCartRent}>Rent</CartButton>
               )}
               {/* <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton> */}
             </ButtonFlex>

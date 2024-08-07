@@ -2,6 +2,7 @@ import "./InvoicePage.css"; // Custom CSS for specific styles
 import { useSelector } from "react-redux";
 import { getCart } from "../Cart/cartSlice";
 import DeleteProduct from "../ProductLayout/DeleteProduct";
+import PayButton from "./PayButton";
 
 const InvoicePage = () => {
   return (
@@ -42,8 +43,8 @@ const Invoice = () => {
             </tr>
           </thead>
           <tbody>
-            {allProducts.map((product) => (
-              <TableRow product={product} />
+            {allProducts.map((product, index) => (
+              <TableRow product={product} key={index} />
             ))}
           </tbody>
         </table>
@@ -182,7 +183,8 @@ const PaymentSection = () => {
       <div class="vspace1em"></div>
 
       <div id="ps2">
-        <button id="bt1">PAY</button>
+        <PayButton id="bt1" value={"Pay"} />
+        {/* <button id="bt1">PAY</button> */}
         <button id="bt2">CANCEL</button>
         <button id="bt3">PRINT INVOICE</button>
         <button id="bt4">EMAIL INVOICE</button>

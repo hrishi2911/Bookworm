@@ -4,16 +4,16 @@
   }
   
   .header {
-    background-color: #00a0e9;
-    color: #ffffff;
+    background-image: url('/public/CartFooter.svg');   
+    background-repeat: no-repeat; 
     padding: 16px;
-    width: 1440px;
+    /* width: 100%; */
     height: 150px;
     left: 0px;
     top: 0px; 
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    /* justify-content: space-between; */
+    /* align-items: center; */
   }
 
   #he
@@ -81,7 +81,7 @@
     width: 50px;
     height: 40px;
  }
- #Logocss
+ #CartLogocss
  {
   position: absolute;
   width: 189px;
@@ -89,6 +89,15 @@
   left: 137px;
   top: 30px;
  }
+
+ #Logocss
+ {
+  position: absolute;
+  width: 189px;
+  height: 58px;
+  top: 30px;
+ }
+
  #fa
  {
   display:flexbox;

@@ -2,15 +2,18 @@ import { useSelector } from "react-redux";
 import { getTotalQuantity } from "./cartSlice";
 import { BsCart3 } from "react-icons/bs";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 function CartOverview() {
   const totalProducts = useSelector(getTotalQuantity);
   return (
     <>
+      <Link to="/cart">
       <div>
         <BsCart3 style={{ position: "relative" }} />
         <StyledButton>{totalProducts}</StyledButton>
       </div>
+      </Link>
     </>
   );
 }

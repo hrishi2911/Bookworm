@@ -21,7 +21,7 @@ function HomepageLayout() {
         <HContent>
           <Head1>
             <div>
-            <img src={'./public/Logo.png'} alt="Main Logo" id="Logocss" />
+              <img src={"./public/Logo.png"} alt="Main Logo" id="Logocss" />
             </div>
             <div
               style={{

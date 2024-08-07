@@ -3,7 +3,7 @@
 }
 
 .header {
-  background-image: url("/public/CartFooter.svg");
+  background-image: url("./CartFooter.svg");
   background-repeat: no-repeat;
   padding: 16px;
   /* width: 100%; */
@@ -86,6 +86,7 @@
   position: absolute;
   width: 189px;
   height: 58px;
+  /* left: 137px; */
   top: 30px;
 }
 

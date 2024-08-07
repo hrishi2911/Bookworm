@@ -1,116 +1,104 @@
-
 .invoice-page {
-    font-family: Arial, sans-serif;
-  }
-  
-  .header {
-    background-image: url('/public/CartFooter.svg');   
-    background-repeat: no-repeat; 
-    padding: 16px;
-    /* width: 100%; */
-    height: 150px;
-    left: 0px;
-    top: 0px; 
-    display: flex;
-    /* justify-content: space-between; */
-    /* align-items: center; */
-  }
+  font-family: Arial, sans-serif;
+}
 
-  #he
-  {
-    color :#00a0e9;
-  }
-  
-  .invoice {
-    background-color: white;
-    padding: 108px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    border: 2px solid #00a0e9;
-    margin: 0 auto;
-    max-width: 1100px;
-    margin-top: 2rem;
-  }
-  
-  .invoice table {
-    width: 100%;
-    margin-top: -60px;
-    margin-bottom: 16px;
-    border-collapse: collapse;
-  }
-  
-  .invoice table th,
-  .invoice table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  .invoice table th {
-    background-color: #f4f4f4;
-    text-align: left;
-  }
-  
-  .details .font-bold {
-    font-weight: bold;
-  }
-  
-  .gift-section input[type="text"],
-  .gift-section input[type="email"] {
-    width: 100%;
-  }
-  
-  .payment-section input[type="radio"] {
-    margin-right: 4px;
-  }
-  
-  .payment-section label {
-    display: flex;
-    align-items: center;
-  }
-  
-  .payment-section button {
-    min-width: 100px;
-  }
+.header {
+  background-image: url("/public/CartFooter.svg");
+  background-repeat: no-repeat;
+  padding: 16px;
+  /* width: 100%; */
+  height: 150px;
+  left: 0px;
+  top: 0px;
+  display: flex;
+  /* justify-content: space-between; */
+  /* align-items: center; */
+}
 
+#he {
+  color: #00a0e9;
+}
 
-  
+.invoice {
+  background-color: white;
+  padding: 108px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  border: 2px solid #00a0e9;
+  margin: 0 auto;
+  max-width: 1100px;
+  margin-top: 2rem;
+}
 
+.invoice table {
+  width: 100%;
+  margin-top: -60px;
+  margin-bottom: 16px;
+  border-collapse: collapse;
+}
 
- #logoimg
- {
-    width: 50px;
-    height: 40px;
- }
- #CartLogocss
- {
+.invoice table th,
+.invoice table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.invoice table th {
+  background-color: #f4f4f4;
+  text-align: left;
+}
+
+.details .font-bold {
+  font-weight: bold;
+}
+
+.gift-section input[type="text"],
+.gift-section input[type="email"] {
+  width: 100%;
+}
+
+.payment-section input[type="radio"] {
+  margin-right: 4px;
+}
+
+.payment-section label {
+  display: flex;
+  align-items: center;
+}
+
+.payment-section button {
+  min-width: 100px;
+}
+
+#logoimg {
+  width: 50px;
+  height: 40px;
+}
+#CartLogocss {
   position: absolute;
   width: 189px;
   height: 58px;
   left: 137px;
   top: 30px;
- }
+}
 
- #Logocss
- {
+#Logocss {
   position: absolute;
   width: 189px;
   height: 58px;
   top: 30px;
- }
+}
 
- #fa
- {
-  display:flexbox;
+#fa {
+  display: flexbox;
   width: 60px;
   height: 60px;
-  margin-top: 2px ;
-  margin-bottom : 70px;
-  margin-left: 25px
-  
- }
+  margin-top: 2px;
+  margin-bottom: 70px;
+  margin-left: 25px;
+}
 
-#ca
-{
+#ca {
   position: absolute;
   width: 920px;
   height: 68px;
@@ -118,28 +106,26 @@
   top: 110px;
 
   margin-top: -5px;
-  
-  font-family: 'Rubik';
+
+  font-family: "Rubik";
   font-style: normal;
   font-weight: 500;
   font-size: 57px;
   line-height: 68px;
   /* identical to box height */
   text-transform: capitalize;
-  
-  color: #000000;
 
+  color: #000000;
 }
 
-#inv
-{
-  position: relative ;
+#inv {
+  position: relative;
   width: 226px;
   height: 68px;
-  left: calc(47% - 226px/2);
+  left: calc(47% - 226px / 2);
   top: -80px;
 
-  font-family: 'Rubik';
+  font-family: "Rubik";
   font-style: normal;
   font-weight: 500;
   font-size: 57px;
@@ -147,21 +133,18 @@
   /* identical to box height */
   text-align: justify;
   text-transform: capitalize;
-  
+
   color: #000000;
-  
 }
 
 hr {
   height: 1px;
-  background-color:#00a0e9;
+  background-color: #00a0e9;
   border: none;
 }
-.detailrow
-{
-  display:contents;
-  color:#00a0e9;
-
+.detailrow {
+  display: contents;
+  color: #00a0e9;
 }
 
 div.vspace1em {
@@ -169,14 +152,10 @@ div.vspace1em {
   height: 1em;
 }
 
-#gift
-{
+#gift {
   position: relative;
   margin-left: 25px;
-
 }
-
-
 
 .detail-row {
   display: flex;
@@ -193,97 +172,81 @@ div.vspace1em {
   text-align: right;
 }
 
-
-#c1
-{
+#c1 {
   color: #000000;
 }
 
-#p1
-{
+#p1 {
   margin-left: 5px;
 }
 
-#ps1
-{
-  display : flex ;
+#ps1 {
+  display: flex;
   justify-content: space-evenly;
 }
 
-#ps2
-{
-  
-  display:flex;
-  justify-content:space-evenly;
- 
-  
-  
+#ps2 {
+  display: flex;
+  justify-content: space-evenly;
 }
 
-#rbt
-{
-  color:#ffffff;
+#rbt {
+  color: #ffffff;
   font-size: medium;
-    background-color:#00a0e9;
-    border-radius: 10px;
-    border-color: #00a0e9;
-    width: 170px;
-    height: 40px;
-    margin-left: 440px;
+  background-color: #00a0e9;
+  border-radius: 10px;
+  border-color: #00a0e9;
+  width: 170px;
+  height: 40px;
+  margin-left: 440px;
 }
 
-#bt1
-  { 
-    color:#ffffff;
-    background-color: #00a0e9;
-    border-radius: 5px;
-    border-color: #00a0e9;
-    width: 170px;
-    height: 40px;
-  }
+#bt1 {
+  color: #ffffff;
+  background-color: #00a0e9;
+  border-radius: 5px;
+  border-color: #00a0e9;
+  width: 170px;
+  height: 40px;
+}
 
-  #bt2
-  { 
-    color:#00a0e9;
-    background-color:#ffffff;
-    border-radius: 5px;
-    border-color: #00a0e9;
-    width: 170px;
-    height: 40px;
-  }
-  #bt3
-  { 
-    font-size: medium;
-    font-weight: 200;
-    color:#ffffff;
-    background-color:#ddd;
-    border-radius: 5px;
-    border-color: #00a0e9;
-    width: 170px;
-    height: 40px;
-  }
-  #bt4
-  { 
-    font-size: medium;
-    font-weight: 200;
-    color:#ffffff;
-    background-color: #ddd;
-    border-radius: 5px;
-    border-color: #00a0e9;
-    width: 170px;
-    height: 40px;
-  }
+#bt2 {
+  color: #00a0e9;
+  background-color: #ffffff;
+  border-radius: 5px;
+  border-color: #00a0e9;
+  width: 170px;
+  height: 40px;
+}
+#bt3 {
+  font-size: medium;
+  font-weight: 200;
+  color: #ffffff;
+  background-color: #ddd;
+  border-radius: 5px;
+  border-color: #00a0e9;
+  width: 170px;
+  height: 40px;
+}
+#bt4 {
+  font-size: medium;
+  font-weight: 200;
+  color: #ffffff;
+  background-color: #ddd;
+  border-radius: 5px;
+  border-color: #00a0e9;
+  width: 170px;
+  height: 40px;
+}
 
-  #rn
-  {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border-style: solid;
-  }
+#rn {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-style: solid;
+}
 
-#dv1
-{
-  font-size:larger;
+#dv1 {
+  font-size: larger;
 }

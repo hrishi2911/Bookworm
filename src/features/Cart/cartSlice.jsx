@@ -42,3 +42,6 @@ export const getTotalPrice = (state) =>
   state.cart.cart.reduce((acc, product) => acc + product.unitPrice, 0);
 
 export const getTotalQuantity = (state) => state.cart.cart.length;
+
+export const isPresentInCart = (id) => (state) =>
+  state.cart.cart.find((item) => item.productId === id)?.unitPrice ?? 0;

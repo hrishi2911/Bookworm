@@ -2,13 +2,16 @@ import { useSelector } from "react-redux";
 import { getCart, getTotalPrice } from "../Cart/cartSlice";
 import {
   BeneFieriesFetch,
-  InvoiceFetch,
   RoyaltyCalc,
+  sendInvoice,
   sendInvoiceDetails,
   sendRoyaltyCal,
 } from "../../services/apiRoyaltyCalc";
+import { useNavigate } from "react-router-dom";
+import { sendMyShelfDetails } from "../../services/apiMyShelf";
 
 export default function PayButton({ id, value }) {
+  const navigate = useNavigate();
   const CartItems = useSelector(getCart);
   const CartPrice = useSelector(getTotalPrice);
 
@@ -40,7 +43,10 @@ export default function PayButton({ id, value }) {
         // if (!invoiceResponse.ok) {
         //   throw new Error("Failed to create invoice");
         // }
-        const invoiceData = await InvoiceFetch(CartPrice); //remaining customerId
+        const invoiceData = await sendInvoice(
+          CartPrice,
+          localStorage.getItem("custId")
+        ); //remaining customerId
         // const invoiceData = await invoiceResponse.json();
         console.log(invoiceData);
         const invoiceIdGenerated = invoiceData.invoiceId;
@@ -55,6 +61,25 @@ export default function PayButton({ id, value }) {
         };
 
         sendInvoiceDetails(invoiceDetails);
+
+        const currentDate = new Date();
+        const nextDay = new Date(currentDate);
+        nextDay.setDate(currentDate.getDate() + 1);
+
+        const myShelfDetails = {
+          quantity: 0,
+          isActive: true,
+          tranType: item.purchaseType,
+          customer: { customerId: localStorage.getItem("custId") },
+          rentNoOfDays: item.purchaseType === "RENT" ? 1 : null,
+          productExpiryDate:
+            item.purchaseType === "PURCHASE"
+              ? null
+              : nextDay.toISOString().split("T")[0],
+          product: { productId: item.productId },
+        };
+
+        sendMyShelfDetails(myShelfDetails);
 
         // Step 2: Fetch the product beneficiary details including the royalty percentage
         // const productBenResponse = await fetch(
@@ -112,11 +137,17 @@ export default function PayButton({ id, value }) {
         //     }
 
         //     console.log("Royalty data posted successfully");
+
+        alert("Added to your shelf");
+        navigate("/myshelf");
       } catch (error) {
         console.error("Error processing royalty calculation", error);
       }
     }
   }
+
+  const custId = localStorage.getItem("custId");
+  if (custId === null) navigate("/login");
 
   return (
     <button id={id} onClick={handleRoyaltyCalculation}>

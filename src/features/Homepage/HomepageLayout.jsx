@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import LogButton from "../../ui/LogButton";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import CartOverview from "../Cart/CartOverview";
 
-function HomepageLayout({ searchTerm, setSearchTerm }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+function HomepageLayout({
+  searchTerm,
+  setSearchTerm,
+  isLoggedIn,
+  setIsLoggedIn,
+}) {
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const handleLogout = () => {
     // Clear authentication tokens or data
@@ -36,10 +40,10 @@ function HomepageLayout({ searchTerm, setSearchTerm }) {
             >
               <CartOverview />
               {isLoggedIn ? (
-                <button onClick={handleLogout}>
-                  <LogButton value="Log Out" />
-                </button>
+                // <button onClick={handleLogout}>
+                <LogButton value="Log Out" handleLogout={handleLogout} />
               ) : (
+                // </button>
                 <Link to="/login">
                   <LogButton value="Log In" />
                 </Link>

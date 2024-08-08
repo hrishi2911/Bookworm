@@ -5,13 +5,23 @@ import AppLayout from "./AppLayout";
 import Footer from "../features/Homepage/Footer";
 import FilterComponent from "../features/Homepage/Filter";
 
-export default function Homepage({ searchTerm, setSearchTerm }) {
+export default function Homepage({
+  searchTerm,
+  setSearchTerm,
+  isLoggedIn,
+  setIsLoggedIn,
+}) {
   return (
     <>
-      <HomepageLayout setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+      <HomepageLayout
+        setSearchTerm={setSearchTerm}
+        searchTerm={searchTerm}
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+      />
       <FilterComponent />
       <Container>
-        <SideMenu />
+        <SideMenu isLoggedIn={isLoggedIn} />
         <AppLayout />
       </Container>
       <Footer />

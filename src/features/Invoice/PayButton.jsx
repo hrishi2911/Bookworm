@@ -9,6 +9,7 @@ import {
 } from "../../services/apiRoyaltyCalc";
 import { useNavigate } from "react-router-dom";
 import { sendMyShelfDetails } from "../../services/apiMyShelf";
+import { useEffect } from "react";
 
 export default function PayButton({ id, value }) {
   const navigate = useNavigate();
@@ -147,7 +148,10 @@ export default function PayButton({ id, value }) {
   }
 
   const custId = localStorage.getItem("custId");
-  if (custId === null) navigate("/login");
+  console.log(custId);
+  useEffect(() => {
+    if (custId === null) return navigate("/login");
+  }, [navigate, custId]);
 
   return (
     <button id={id} onClick={handleRoyaltyCalculation}>

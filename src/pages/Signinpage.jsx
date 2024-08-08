@@ -41,6 +41,7 @@ export default function SignInPage({ setIsLoggedIn }) {
         // Redirect to homepage
         localStorage.setItem("custId", data.customerId);
         setIsLoggedIn(true);
+        localStorage.setItem("isLogIn", true);
         navigate("/");
       } else {
         const errorData = await response.json();

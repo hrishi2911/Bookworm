@@ -1,6 +1,6 @@
 import MenuList from "./MenuList";
 
-function SideMenu() {
+function SideMenu({ isLoggedIn }) {
   const arr = [
     "Home",
     "Product",
@@ -18,7 +18,7 @@ function SideMenu() {
     "/MyAccount",
   ];
 
-  const isLogin = false;
+  const isLogin = isLoggedIn;
 
   return (
     <>

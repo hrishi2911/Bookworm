@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Signupbgimage.css";
 
-export default function SignInPage() {
+export default function SignInPage({ setIsLoggedIn }) {
   const [customerEmail, setcustomerEmail] = useState("");
   const [customerPassword, setcustomerPassword] = useState("");
   const [error, setError] = useState("");
@@ -39,7 +39,8 @@ export default function SignInPage() {
         console.log("Login successful:", data);
         // Store authentication token or user info if needed
         // Redirect to homepage
-
+        localStorage.setItem("custId", data.customerId);
+        setIsLoggedIn(true);
         navigate("/");
       } else {
         const errorData = await response.json();

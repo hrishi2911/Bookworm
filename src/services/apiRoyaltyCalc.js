@@ -1,4 +1,4 @@
-export async function InvoiceFetch(CartPrice) {
+export async function sendInvoice(CartPrice, custId) {
   const invoiceResponse = await fetch("http://localhost:8080/api/invoices", {
     method: "POST",
     headers: {
@@ -8,7 +8,7 @@ export async function InvoiceFetch(CartPrice) {
       invoiceDate: new Date().toISOString(),
       invoiceAmount: CartPrice,
       customer: {
-        customerId: 1,
+        customerId: custId,
       },
     }),
   });

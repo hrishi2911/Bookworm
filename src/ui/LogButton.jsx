@@ -1,8 +1,8 @@
 import styled from "styled-components";
-function LogButton({ value }) {
+function LogButton({ value, handleLogout }) {
   return (
     <>
-      <StyledButton>{value}</StyledButton>
+      <StyledButton onClick={handleLogout}>{value}</StyledButton>
     </>
   );
 }

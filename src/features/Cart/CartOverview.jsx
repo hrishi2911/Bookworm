@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
-import { getTotalQuantity } from "./cartSlice";
+import { getTotalLength } from "./cartSlice";
 import { BsCart3 } from "react-icons/bs";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 function CartOverview() {
-  const totalProducts = useSelector(getTotalQuantity);
+  const totalProducts = useSelector(getTotalLength);
   const navigate = useNavigate();
 
   function handleGoToInvoice() {

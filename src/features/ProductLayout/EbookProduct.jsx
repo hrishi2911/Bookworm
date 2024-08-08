@@ -17,6 +17,8 @@ export default function EbookProduct({ product, isMyshelf = false }) {
     productIsbn,
     rentable,
     productType: { typeDesc },
+    minRentDays,
+    rentPerDay,
   } = product;
 
   const Navigate = useNavigate();
@@ -24,9 +26,9 @@ export default function EbookProduct({ product, isMyshelf = false }) {
   const isInCart = currQuantity > 0;
   const dispatch = useDispatch();
   console.log(rentable);
-
+  const params = new URLSearchParams(`fromShelf=${isMyshelf}`);
   function showProductDetails(productId) {
-    Navigate(`/product/${productId}`);
+    Navigate(`/product/${productId}?${params}`);
   }
 
   function handleAddtoCart() {
@@ -49,6 +51,8 @@ export default function EbookProduct({ product, isMyshelf = false }) {
       unitPrice: productOfferPrice,
       productType: typeDesc,
       purchaseType: "RENT",
+      minRentDays,
+      rentPerDay,
     };
     dispatch(addItem(newItem));
   }

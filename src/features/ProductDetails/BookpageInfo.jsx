@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import "./BookpageInfo.css";
 import { getProduct } from "../../services/apiProduct";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Spinner from "../../ui/Spinner";
 import CartButton from "../../ui/CartButton";
 import DeleteProduct from "../ProductLayout/DeleteProduct";
@@ -12,6 +12,10 @@ import { addItem, isPresentInCart } from "../Cart/cartSlice";
 function BookpageInfo() {
   const [productData, setProductData] = useState(null);
   const { productId } = useParams();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const fromShelf = queryParams.get("fromShelf");
+  console.log(fromShelf);
   console.log(productId);
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +29,21 @@ function BookpageInfo() {
   const currQuantity = useSelector(isPresentInCart(productId));
   const isInCart = currQuantity > 0;
   const dispatch = useDispatch();
-
+  if (productData == null) return <Spinner />;
+  const {
+    productImg,
+    productName,
+    productOfferPrice,
+    productAuthor,
+    productIsbn,
+    rentable,
+    productDescriptionLong,
+    language: { languageDesc },
+    genre: { genreDesc },
+    productType: { typeDesc },
+    minRentDays,
+    rentPerDay,
+  } = productData;
   function handleAddtoCart() {
     const newItem = {
       productId,
@@ -41,29 +59,18 @@ function BookpageInfo() {
   function handleAddtoCartRent() {
     const newItem = {
       productId,
+
       productIsbn,
       productName,
       unitPrice: productOfferPrice,
       productType: typeDesc,
       purchaseType: "RENT",
+      minRentDays,
+      rentPerDay,
     };
     dispatch(addItem(newItem));
   }
 
-  if (productData == null) return <Spinner />;
-
-  const {
-    productName,
-    productIsbn,
-    productImg,
-    productAuthor,
-    productOfferPrice,
-    productDescriptionLong,
-    language: { languageDesc },
-    genre: { genreDesc },
-    rentable,
-    productType: { typeDesc },
-  } = productData;
   return (
     <>
       <Row className="book-info">
@@ -78,20 +85,24 @@ function BookpageInfo() {
           <h1 className="book-title">{productName}</h1>
           <p className="book-author">{productAuthor}</p>
           <h3 className="book-price">$ {productOfferPrice}</h3>
-          <div className="button-group">
-            <CartButton>Buy Now</CartButton>
-            {isInCart && (
-              <div>
-                <DeleteProduct productId={productId} />
-              </div>
-            )}
-            {!isInCart && (
-              <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton>
-            )}
-            {!isInCart && rentable && (
-              <CartButton onClick={handleAddtoCartRent}>Rent</CartButton>
-            )}
-          </div>
+          {fromShelf === "true" ? (
+            ""
+          ) : (
+            <div className="button-group">
+              {/* <CartButton>Buy Now</CartButton> */}
+              {isInCart && (
+                <div>
+                  <DeleteProduct productId={productId} />
+                </div>
+              )}
+              {!isInCart && (
+                <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton>
+              )}
+              {!isInCart && rentable && (
+                <CartButton onClick={handleAddtoCartRent}>Rent</CartButton>
+              )}
+            </div>
+          )}
         </Col>
       </Row>
       <Row className="mt-5">

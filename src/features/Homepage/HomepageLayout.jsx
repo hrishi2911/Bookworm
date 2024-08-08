@@ -14,6 +14,8 @@ function HomepageLayout({
   const handleLogout = () => {
     // Clear authentication tokens or data
     setIsLoggedIn(false);
+    localStorage.removeItem("isLogIn");
+    localStorage.removeItem("custId");
     // Optionally, redirect to login page
     navigate("/login"); // Redirect to login page after logout
   };
@@ -21,7 +23,7 @@ function HomepageLayout({
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
-
+  const isLogin = isLoggedIn || localStorage.getItem("isLogIn");
   return (
     <>
       <HSection>
@@ -39,7 +41,7 @@ function HomepageLayout({
               }}
             >
               <CartOverview />
-              {isLoggedIn ? (
+              {isLogin ? (
                 // <button onClick={handleLogout}>
                 <LogButton value="Log Out" handleLogout={handleLogout} />
               ) : (

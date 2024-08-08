@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItem, isPresentInCart } from "../Cart/cartSlice";
 import DeleteProduct from "./DeleteProduct";
 
-export default function EbookProduct({ product }) {
+export default function EbookProduct({ product, isMyshelf = false }) {
   const {
     productImg,
     productName,
@@ -65,20 +65,22 @@ export default function EbookProduct({ product }) {
             <BookDetails type="booktitle">{productName}</BookDetails>
             <BookDetails type="author">By {productAuthor}</BookDetails>
             <BookDetails type="price">$ {productOfferPrice}</BookDetails>
-            <ButtonFlex>
-              {isInCart && (
-                <div>
-                  <DeleteProduct productId={productId} />
-                </div>
-              )}
-              {!isInCart && (
-                <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton>
-              )}
-              {!isInCart && rentable && (
-                <CartButton onClick={handleAddtoCartRent}>Rent</CartButton>
-              )}
-              {/* <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton> */}
-            </ButtonFlex>
+            {!isMyshelf && (
+              <ButtonFlex>
+                {isInCart && (
+                  <div>
+                    <DeleteProduct productId={productId} />
+                  </div>
+                )}
+                {!isInCart && (
+                  <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton>
+                )}
+                {!isInCart && rentable && (
+                  <CartButton onClick={handleAddtoCartRent}>Rent</CartButton>
+                )}
+                {/* <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton> */}
+              </ButtonFlex>
+            )}
           </ContentBox>
         </Box>
       </EbookProductBox>

@@ -18,7 +18,7 @@ function SideMenu({ isLoggedIn }) {
     "/MyAccount",
   ];
 
-  const isLogin = isLoggedIn;
+  const isLogin = isLoggedIn || localStorage.getItem("isLogIn");
 
   return (
     <>

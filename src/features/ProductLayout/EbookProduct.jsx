@@ -7,7 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItem, isPresentInCart } from "../Cart/cartSlice";
 import DeleteProduct from "./DeleteProduct";
 
-export default function EbookProduct({ product, isMyshelf = false }) {
+export default function EbookProduct({
+  product,
+  isMyshelf = false,
+  remainingDays,
+}) {
   const {
     productImg,
     productName,
@@ -68,7 +72,19 @@ export default function EbookProduct({ product, isMyshelf = false }) {
           <ContentBox>
             <BookDetails type="booktitle">{productName}</BookDetails>
             <BookDetails type="author">By {productAuthor}</BookDetails>
-            <BookDetails type="price">$ {productOfferPrice}</BookDetails>
+            {!isMyshelf && (
+              <BookDetails type="price">$ {productOfferPrice}</BookDetails>
+            )}
+            {remainingDays > 0 && (
+              <BookDetails type="days">
+                Remaining Days:{remainingDays}
+              </BookDetails>
+            )}
+            {rentable && !isMyshelf && (
+              <div>
+                Rent :{rentPerDay} Min Days:{minRentDays}
+              </div>
+            )}
             {!isMyshelf && (
               <ButtonFlex>
                 {isInCart && (
@@ -80,7 +96,9 @@ export default function EbookProduct({ product, isMyshelf = false }) {
                   <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton>
                 )}
                 {!isInCart && rentable && (
-                  <CartButton onClick={handleAddtoCartRent}>Rent</CartButton>
+                  <>
+                    <CartButton onClick={handleAddtoCartRent}>Rent</CartButton>
+                  </>
                 )}
                 {/* <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton> */}
               </ButtonFlex>

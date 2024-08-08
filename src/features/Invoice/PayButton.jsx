@@ -65,7 +65,7 @@ export default function PayButton({ id, value }) {
           quantity: 0,
           basePrice: item.unitPrice,
           tranType: item.purchaseType,
-          rentNoOfDays: item.purchaseType === "RENT" ? 1 : null,
+          rentNoOfDays: item.purchaseType === "RENT" ? item.minRentDays : null,
           invoice: { invoiceId: invoiceIdGenerated },
           product: { productId: item.productId },
         };
@@ -73,19 +73,17 @@ export default function PayButton({ id, value }) {
         sendInvoiceDetails(invoiceDetails);
 
         const currentDate = new Date();
-        const nextDay = new Date(currentDate);
-        nextDay.setDate(currentDate.getDate() + 1);
+        const lastDay = new Date(currentDate);
+        lastDay.setDate(currentDate.getDate() + item.minRentDays);
 
         const myShelfDetails = {
-          quantity: 0,
           isActive: true,
           tranType: item.purchaseType,
           customer: { customerId: localStorage.getItem("custId") },
-          rentNoOfDays: item.purchaseType === "RENT" ? 1 : null,
           productExpiryDate:
             item.purchaseType === "PURCHASE"
               ? null
-              : nextDay.toISOString().split("T")[0],
+              : lastDay.toISOString().split("T")[0],
           product: { productId: item.productId },
         };
 

@@ -42,7 +42,16 @@ export const { addItem, deleteItem, clearCart } = cartSlice.actions;
 export const getCart = (state) => state.cart.cart;
 
 export const getTotalPrice = (state) =>
-  state.cart.cart.reduce((acc, product) => acc + product.unitPrice, 0);
+  state.cart.cart
+    .reduce((acc, product) => {
+      if (product.purchaseType === "PURCHASE") {
+        return acc + product.unitPrice;
+      } else if (product.purchaseType === "RENT") {
+        return acc + product.rentPerDay * product.minRentDays;
+      }
+      return acc;
+    }, 0)
+    .toFixed(2);
 
 export const getTotalLength = (state) => state.cart.cart.length;
 

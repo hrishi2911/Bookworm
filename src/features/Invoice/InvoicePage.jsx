@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import "./InvoicePage.css"; // Custom CSS for specific styles
 import { useSelector } from "react-redux";
-import { getCart } from "../Cart/cartSlice";
+import { getCart, getTotalPrice } from "../Cart/cartSlice";
 import DeleteProduct from "../ProductLayout/DeleteProduct";
 import PayButton from "./PayButton";
 
@@ -28,6 +28,7 @@ const Header = () => {
 };
 const Invoice = () => {
   const allProducts = useSelector(getCart);
+  const totalPrice = useSelector(getTotalPrice);
   return (
     <>
       <section className="invoice bg-white p-5 shadow-lg border rounded-md mx-auto my-8 w-11/12 md:w-2/3 lg:w-1/2">
@@ -57,10 +58,10 @@ const Invoice = () => {
         <div id="dv1" class="detailrow">
           <div class="detail-row">
             <span class="label">TOTAL</span>
-            <span class="value">$379</span>
+            <span class="value">${totalPrice}</span>
           </div>
 
-          <div class="vspace1em"></div>
+          {/* <div class="vspace1em"></div>
 
           <div class="detail-row">
             <span id="c1" class="label">
@@ -101,9 +102,9 @@ const Invoice = () => {
             <span class="value"> $362.41</span>
           </div>
 
-          <div class="vspace1em"></div>
+          <div class="vspace1em"></div> */}
         </div>
-        <GiftSection />
+        {/* <GiftSection /> */}
         <PaymentSection />
       </section>
     </>
@@ -118,6 +119,8 @@ function TableRow({ product }) {
     unitPrice,
     productType,
     purchaseType,
+    rentPerDay,
+    minRentDays,
   } = product;
   return (
     <tr>
@@ -126,7 +129,9 @@ function TableRow({ product }) {
       <td className="border px-4 py-2">{productType}</td>
       <td className="border px-4 py-2">{productName}</td>
       <td className="border px-4 py-2">{purchaseType}</td>
-      <td className="border px-4 py-2">{unitPrice}</td>
+      <td className="border px-4 py-2">
+        {purchaseType === "RENT" ? rentPerDay * minRentDays : unitPrice}
+      </td>
       <td className="border px-4 py-2 text-center">
         <DeleteProduct productId={productId} />
       </td>
@@ -134,47 +139,47 @@ function TableRow({ product }) {
   );
 }
 
-const GiftSection = () => {
-  return (
-    <div className="gift-section my-6">
-      <div className="flex items-center mb-2">
-        <label htmlFor="gift" className="ml-2">
-          Want To Gift?
-        </label>
-        <input type="checkbox" id="gift" />
-      </div>
-      <div class="vspace1em"></div>
-      <div className="flex flex-col space-y-2">
-        <input
-          type="text"
-          id="rn"
-          placeholder="Receiver's Name"
-          className="border p-100 rounded"
-        />
-        <div class="vspace1em"></div>
-        <input
-          type="email"
-          id="rn"
-          placeholder="Receiver's EMail ID"
-          className="border p-100 rounded"
-        />
-        <div class="vspace1em"></div>
-        <div class="vspace1em"></div>
-        <div class="vspace1em"></div>
-      </div>
-      <button id="rbt" className="mt-2 bg-blue-500 text-white p-2 rounded">
-        ADD RECEIPT
-      </button>
-      <div class="vspace1em"></div>
-      <div class="vspace1em"></div>
-    </div>
-  );
-};
+// const GiftSection = () => {
+//   return (
+//     <div className="gift-section my-6">
+//       <div className="flex items-center mb-2">
+//         <label htmlFor="gift" className="ml-2">
+//           Want To Gift?
+//         </label>
+//         <input type="checkbox" id="gift" />
+//       </div>
+//       <div class="vspace1em"></div>
+//       <div className="flex flex-col space-y-2">
+//         <input
+//           type="text"
+//           id="rn"
+//           placeholder="Receiver's Name"
+//           className="border p-100 rounded"
+//         />
+//         <div class="vspace1em"></div>
+//         <input
+//           type="email"
+//           id="rn"
+//           placeholder="Receiver's EMail ID"
+//           className="border p-100 rounded"
+//         />
+//         <div class="vspace1em"></div>
+//         <div class="vspace1em"></div>
+//         <div class="vspace1em"></div>
+//       </div>
+//       <button id="rbt" className="mt-2 bg-blue-500 text-white p-2 rounded">
+//         ADD RECEIPT
+//       </button>
+//       <div class="vspace1em"></div>
+//       <div class="vspace1em"></div>
+//     </div>
+//   );
+// };
 
 const PaymentSection = () => {
   return (
     <>
-      <div id="ps1">
+      {/* <div id="ps1">
         <label>
           <span>
             Select Payment Mode:
@@ -186,7 +191,7 @@ const PaymentSection = () => {
             UPI
           </span>
         </label>
-      </div>
+      </div> */}
 
       <div class="vspace1em"></div>
       <div class="vspace1em"></div>

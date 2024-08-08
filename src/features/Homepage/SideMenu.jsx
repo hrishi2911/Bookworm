@@ -1,11 +1,10 @@
-
 import { useState } from "react";
 import MenuList from "./MenuList";
 import styled from "styled-components";
 
 function SideMenu({ isLoggedIn }) {
   const [selectedIndex, setSelectedIndex] = useState(null);
-  
+
   const arr = [
     "Home",
     "Product",
@@ -26,11 +25,12 @@ function SideMenu({ isLoggedIn }) {
   const handleSelect = (index) => {
     setSelectedIndex(index);
   };
+  const isLogin = isLoggedIn || localStorage.getItem("isLogIn");
 
   return (
     <SideMenuContainer>
       <MenuListUl>
-        {isLoggedIn
+        {isLogin
           ? arr.map((val, index) => (
               <MenuList
                 value={val}

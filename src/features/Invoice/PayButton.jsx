@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { getCart, getTotalPrice } from "../Cart/cartSlice";
+import { getCart, getTotalLength, getTotalPrice } from "../Cart/cartSlice";
 import {
   BeneFieriesFetch,
   RoyaltyCalc,
@@ -12,9 +12,18 @@ import { sendMyShelfDetails } from "../../services/apiMyShelf";
 import { useEffect } from "react";
 
 export default function PayButton({ id, value }) {
+  const custId = localStorage.getItem("custId");
+  console.log(custId);
   const navigate = useNavigate();
+  useEffect(() => {
+    if (custId === null) return navigate("/login");
+  }, [navigate, custId]);
   const CartItems = useSelector(getCart);
+  const length = useSelector(getTotalLength);
   const CartPrice = useSelector(getTotalPrice);
+  const isEmptyCart = length < 1;
+
+  if (isEmptyCart) return alert("Your cart is empty");
 
   const RentalPrice = CartItems.filter(
     (item) => item.purchaseType === "RENT"
@@ -146,12 +155,6 @@ export default function PayButton({ id, value }) {
       }
     }
   }
-
-  const custId = localStorage.getItem("custId");
-  console.log(custId);
-  useEffect(() => {
-    if (custId === null) return navigate("/login");
-  }, [navigate, custId]);
 
   return (
     <button id={id} onClick={handleRoyaltyCalculation}>

@@ -9,6 +9,9 @@ const initialState = {
   //       productName: 'The Gatsby',
   //       unitPrice: 100,
   //       productType:Music
+  // rentPerDay:11
+  // minRentDays
+
   //     },
   //   ],
 };
@@ -41,7 +44,7 @@ export const getCart = (state) => state.cart.cart;
 export const getTotalPrice = (state) =>
   state.cart.cart.reduce((acc, product) => acc + product.unitPrice, 0);
 
-export const getTotalQuantity = (state) => state.cart.cart.length;
+export const getTotalLength = (state) => state.cart.cart.length;
 
 export const isPresentInCart = (id) => (state) =>
   state.cart.cart.find((item) => item.productId === id)?.unitPrice ?? 0;

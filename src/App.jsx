@@ -12,6 +12,7 @@ import BookpageInfo from "./features/ProductDetails/BookpageInfo";
 import { useState } from "react";
 import MyAccount from "./pages/MyAccount";
 import Myshelf from "./pages/Myshelf";
+import MyLibrary from "./pages/MyLibrary";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -40,6 +41,7 @@ function App() {
               element={<ViewAllContainer searchTerm={searchTerm} />}
             />
             <Route path="/myaccount" element={<MyAccount />} />
+            <Route path="/mylibrary" element={<MyLibrary />} />
             <Route path="/myshelf" element={<Myshelf />} />
           </Route>
           <Route path="/cart" element={<InvoicePage />} />

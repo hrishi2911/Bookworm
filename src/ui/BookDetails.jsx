@@ -29,6 +29,12 @@ const variations = {
     text-transform: uppercase;
     font-weight: 600;
   `,
+  days: css`
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: red;
+  `,
 };
 
 const BookDetails = styled.p`

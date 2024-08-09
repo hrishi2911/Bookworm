@@ -19,13 +19,15 @@ export default function Myshelf() {
   if (myshelf === null || myshelf.length === 0) return <Spinner />;
   return (
     <ProductBoxContainer>
-      {myshelf.map((item) => (
-        <EbookProduct
-          product={item.product}
-          isMyshelf={true}
-          key={item.product.productId}
-        />
-      ))}
+      {myshelf
+        .filter((item) => item.tranType === "PURCHASE")
+        .map((item) => (
+          <EbookProduct
+            product={item.product}
+            isMyshelf={true}
+            key={item.product.productId}
+          />
+        ))}
     </ProductBoxContainer>
   );
 }

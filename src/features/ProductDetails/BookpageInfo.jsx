@@ -84,24 +84,26 @@ function BookpageInfo() {
         <Col md={8}>
           <h1 className="book-title">{productName}</h1>
           <p className="book-author">{productAuthor}</p>
-          <h3 className="book-price">$ {productOfferPrice}</h3>
           {fromShelf === "true" ? (
             ""
           ) : (
-            <div className="button-group">
-              {/* <CartButton>Buy Now</CartButton> */}
-              {isInCart && (
-                <div>
-                  <DeleteProduct productId={productId} />
-                </div>
-              )}
-              {!isInCart && (
-                <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton>
-              )}
-              {!isInCart && rentable && (
-                <CartButton onClick={handleAddtoCartRent}>Rent</CartButton>
-              )}
-            </div>
+            <>
+              <h3 className="book-price">$ {productOfferPrice}</h3>
+              <div className="button-group">
+                {/* <CartButton>Buy Now</CartButton> */}
+                {isInCart && (
+                  <div>
+                    <DeleteProduct productId={productId} />
+                  </div>
+                )}
+                {!isInCart && (
+                  <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton>
+                )}
+                {!isInCart && rentable && (
+                  <CartButton onClick={handleAddtoCartRent}>Rent</CartButton>
+                )}
+              </div>
+            </>
           )}
         </Col>
       </Row>

@@ -35,7 +35,10 @@ function App() {
             <Route index element={<AllProducts searchTerm={searchTerm} />} />
             <Route path="/product" element={<ProductPage />} />
             <Route path="/product/:productId" element={<BookpageInfo />} />
-            <Route path="/lendinglib" element={<LendingLibraryPage />} />
+            <Route
+              path="/lendinglib"
+              element={<LendingLibraryPage searchTerm={searchTerm} />}
+            />
             <Route
               path="/EBookViewAll"
               element={<ViewAllContainer searchTerm={searchTerm} />}

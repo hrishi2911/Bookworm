@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
-import { getCart, getTotalLength, getTotalPrice } from "../Cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart, getCart, getTotalPrice } from "../Cart/cartSlice";
 import {
   BeneFieriesFetch,
   RoyaltyCalc,
@@ -9,21 +9,25 @@ import {
 } from "../../services/apiRoyaltyCalc";
 import { useNavigate } from "react-router-dom";
 import { sendMyShelfDetails } from "../../services/apiMyShelf";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { getCustomer } from "../../services/apiCustomer";
 
 export default function PayButton({ id, value }) {
   const custId = localStorage.getItem("custId");
+  const [libraryExpiryDate, setLibraryExpiryDate] = useState(null);
   console.log(custId);
   const navigate = useNavigate();
   useEffect(() => {
     if (custId === null) return navigate("/login");
+    const fetchCustomer = async () => {
+      const customerData = await getCustomer(custId);
+      setLibraryExpiryDate(customerData.libraryPackage?.expiryDate);
+    };
+    fetchCustomer();
   }, [navigate, custId]);
   const CartItems = useSelector(getCart);
-  const length = useSelector(getTotalLength);
   const CartPrice = useSelector(getTotalPrice);
-  const isEmptyCart = length < 1;
-
-  if (isEmptyCart) return alert("Your cart is empty");
+  const dispatch = useDispatch();
 
   const RentalPrice = CartItems.filter(
     (item) => item.purchaseType === "RENT"
@@ -60,12 +64,27 @@ export default function PayButton({ id, value }) {
         // const invoiceData = await invoiceResponse.json();
         console.log(invoiceData);
         const invoiceIdGenerated = invoiceData.invoiceId;
+        const now = new Date();
+        const returnDate = new Date(libraryExpiryDate);
+        const remainingLibraryDays = Math.floor(
+          (returnDate - now) / (1000 * 60 * 60 * 24)
+        );
 
         const invoiceDetails = {
           quantity: 0,
-          basePrice: item.unitPrice,
+          basePrice:
+            item.purchaseType === "RENT"
+              ? item.minRentDays * item.rentPerDay
+              : item.purchaseType === "LENT"
+              ? 0
+              : item.unitPrice,
           tranType: item.purchaseType,
-          rentNoOfDays: item.purchaseType === "RENT" ? item.minRentDays : null,
+          rentNoOfDays:
+            item.purchaseType === "RENT"
+              ? item.minRentDays
+              : item.purchaseType === "LENT"
+              ? remainingLibraryDays
+              : null,
           invoice: { invoiceId: invoiceIdGenerated },
           product: { productId: item.productId },
         };
@@ -83,6 +102,8 @@ export default function PayButton({ id, value }) {
           productExpiryDate:
             item.purchaseType === "PURCHASE"
               ? null
+              : item.purchaseType === "LENT"
+              ? libraryExpiryDate
               : lastDay.toISOString().split("T")[0],
           product: { productId: item.productId },
         };
@@ -147,6 +168,7 @@ export default function PayButton({ id, value }) {
         //     console.log("Royalty data posted successfully");
 
         alert("Added to your shelf");
+        dispatch(clearCart());
         navigate("/myshelf");
       } catch (error) {
         console.error("Error processing royalty calculation", error);

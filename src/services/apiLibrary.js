@@ -1,6 +1,6 @@
-import { assignCustomerLibrary } from "./apiCustomer";
+import { assignLibraryToCustomer } from "./apiCustomer";
 
-export async function sendLibraryDetails(library, custId) {
+export async function sendLibraryDetails(library, customerData, custId) {
   const response = await fetch(`http://localhost:8080/api/library-packages`, {
     method: "POST",
     headers: {
@@ -9,6 +9,7 @@ export async function sendLibraryDetails(library, custId) {
     body: JSON.stringify(library),
   });
   const data = await response.json();
-  assignCustomerLibrary(data.id, custId);
+  customerData.libraryPackage = { id: data.id };
+  assignLibraryToCustomer(customerData, custId);
   return data;
 }

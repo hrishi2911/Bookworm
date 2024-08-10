@@ -38,7 +38,7 @@ export function RoyaltyCalc(item, productBenData, RentalPrice) {
   if (item.purchaseType === "PURCHASE") {
     const basePrice = item.unitPrice;
     royaltyAmount = (basePrice * productBenData.prodBenPercentage) / 100;
-  } else if (item.purchaseType === "library") {
+  } else if (item.purchaseType === "LENT") {
     const averageBookCost = item.packageCost / item.noOfBooksAllowed;
     royaltyAmount = (averageBookCost * royaltyPercentage) / 100;
   } else if (item.purchaseType === "RENT") {

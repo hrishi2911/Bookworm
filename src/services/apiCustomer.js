@@ -5,7 +5,7 @@ export async function getCustomer(id) {
   return data;
 }
 
-export async function assignLibraryToCustomer(id, custId) {
+export async function assignLibraryToCustomer(customerData, custId) {
   const invoiceDetail = await fetch(
     `http://localhost:8080/api/customers/${custId}`,
     {
@@ -13,7 +13,7 @@ export async function assignLibraryToCustomer(id, custId) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ libraryPackage: id }),
+      body: JSON.stringify(customerData),
     }
   );
   console.log("Successfully added library to customer");

@@ -11,6 +11,8 @@ export default function EbookProduct({
   product,
   isMyshelf = false,
   remainingDays,
+  fromLendingLibrary,
+  remainingBooks,
 }) {
   const {
     productImg,
@@ -61,9 +63,26 @@ export default function EbookProduct({
     dispatch(addItem(newItem));
   }
 
+  function handleAddtoCartLent() {
+    const newItem = {
+      productId,
+      productIsbn,
+      productName,
+      unitPrice: productOfferPrice,
+      productType: typeDesc,
+      purchaseType: "LENT",
+      minRentDays,
+      rentPerDay,
+    };
+    dispatch(addItem(newItem));
+  }
+
   return (
     <>
       <EbookProductBox>
+        {remainingBooks > -1 && (
+          <div>Remaining number of books you can add: {remainingBooks}</div>
+        )}
         <Box>
           <ImgBox
             imageURL={productImg}
@@ -75,33 +94,55 @@ export default function EbookProduct({
             {!isMyshelf && (
               <BookDetails type="price">$ {productOfferPrice}</BookDetails>
             )}
-            {remainingDays > 0 && (
-              <BookDetails type="days">
-                Remaining Days:{remainingDays}
-              </BookDetails>
-            )}
-            {rentable && !isMyshelf && (
-              <div>
-                Rent :{rentPerDay} Min Days:{minRentDays}
-              </div>
-            )}
-            {!isMyshelf && (
-              <ButtonFlex>
+
+            {fromLendingLibrary ? (
+              <>
+                {!isInCart && (
+                  <CartButton onClick={handleAddtoCartLent}>
+                    Add To Library
+                  </CartButton>
+                )}
                 {isInCart && (
                   <div>
                     <DeleteProduct productId={productId} />
                   </div>
                 )}
-                {!isInCart && (
-                  <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton>
+              </>
+            ) : (
+              <>
+                {remainingDays > 0 && (
+                  <BookDetails type="days">
+                    Remaining Days:{remainingDays}
+                  </BookDetails>
                 )}
-                {!isInCart && rentable && (
-                  <>
-                    <CartButton onClick={handleAddtoCartRent}>Rent</CartButton>
-                  </>
+                {rentable && !isMyshelf && (
+                  <div>
+                    Rent :{rentPerDay} Min Days:{minRentDays}
+                  </div>
                 )}
-                {/* <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton> */}
-              </ButtonFlex>
+                {!isMyshelf && (
+                  <ButtonFlex>
+                    {isInCart && (
+                      <div>
+                        <DeleteProduct productId={productId} />
+                      </div>
+                    )}
+                    {!isInCart && (
+                      <CartButton onClick={handleAddtoCart}>
+                        Add To Cart
+                      </CartButton>
+                    )}
+                    {!isInCart && rentable && (
+                      <>
+                        <CartButton onClick={handleAddtoCartRent}>
+                          Rent
+                        </CartButton>
+                      </>
+                    )}
+                    {/* <CartButton onClick={handleAddtoCart}>Add To Cart</CartButton> */}
+                  </ButtonFlex>
+                )}
+              </>
             )}
           </ContentBox>
         </Box>

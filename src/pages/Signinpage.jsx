@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Signupbgimage.css";
+import HomeButton from "../ui/HomeButton";
+import { useHomeBack } from "../hooks/useMoveBack";
 
 export default function SignInPage({ setIsLoggedIn }) {
   const [customerEmail, setcustomerEmail] = useState("");
   const [customerPassword, setcustomerPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const homeBack = useHomeBack();
 
   const validateEmail = (customerEmail) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -57,6 +60,7 @@ export default function SignInPage({ setIsLoggedIn }) {
   return (
     <div className="Signupbgimage">
       <form className="formcss" onSubmit={handleSignIn}>
+        <HomeButton onClick={homeBack} />
         <h2 className="poppins-semibold">Login Account</h2>
         <br />
         {error && <p style={{ color: "red" }}>{error}</p>}

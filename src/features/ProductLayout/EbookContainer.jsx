@@ -1,13 +1,17 @@
 import styled from "styled-components";
 import EbookProduct from "./EbookProduct";
 
-export default function EbookContainer({ arr }) {
+export default function EbookContainer({ arr, fromLendingLibrary }) {
   return (
     <ProductBoxContainer>
       {arr
         .filter((product, index) => index < 4)
         .map((product, index) => (
-          <EbookProduct key={index} product={product} />
+          <EbookProduct
+            key={index}
+            product={product}
+            fromLendingLibrary={fromLendingLibrary}
+          />
         ))}
     </ProductBoxContainer>
   );

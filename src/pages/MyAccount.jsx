@@ -24,36 +24,35 @@ const MyAccount = () => {
   if (customer === null) return <Spinner />;
   return (
     <StyledContainer>
-    <StyledRow>
-      <StyledCol>
-        <StyledCard>
-          <StyledCardBody>
-            <StyledCardTitle>Customer Information</StyledCardTitle>
-            <StyledCardText>
-              <Strong>Name:</Strong> {customer.customerName}
-            </StyledCardText>
-            <StyledCardText>
-              <Strong>Email:</Strong> {customer.customerEmail}
-            </StyledCardText>
-            <StyledCardText>
-              <Strong>Phone:</Strong> {customer.customerPhone}
-            </StyledCardText>
-            <StyledCardText>
-              <Strong>Address:</Strong> {customer.customerAddress}
-            </StyledCardText>
-            <StyledCardText>
-              <Strong>Occupation:</Strong> {customer.customerOccupation}
-            </StyledCardText>
-          </StyledCardBody>
-        </StyledCard>
-      </StyledCol>
-    </StyledRow>
-  </StyledContainer>
+      <StyledRow>
+        <StyledCol>
+          <StyledCard>
+            <StyledCardBody>
+              <StyledCardTitle>Customer Information</StyledCardTitle>
+              <StyledCardText>
+                <Strong>Name:</Strong> {customer.customerName}
+              </StyledCardText>
+              <StyledCardText>
+                <Strong>Email:</Strong> {customer.customerEmail}
+              </StyledCardText>
+              <StyledCardText>
+                <Strong>Phone:</Strong> {customer.customerPhone}
+              </StyledCardText>
+              <StyledCardText>
+                <Strong>Address:</Strong> {customer.customerAddress}
+              </StyledCardText>
+              <StyledCardText>
+                <Strong>Occupation:</Strong> {customer.customerOccupation}
+              </StyledCardText>
+            </StyledCardBody>
+          </StyledCard>
+        </StyledCol>
+      </StyledRow>
+    </StyledContainer>
   );
 };
 
 export default MyAccount;
-
 
 const StyledContainer = styled(Container)`
   margin: 3rem;
@@ -93,4 +92,3 @@ const StyledCardText = styled(Card.Text)`
 const Strong = styled.strong`
   color: #000;
 `;
-

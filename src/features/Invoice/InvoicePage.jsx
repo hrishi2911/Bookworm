@@ -130,7 +130,11 @@ function TableRow({ product }) {
       <td className="border px-4 py-2">{productName}</td>
       <td className="border px-4 py-2">{purchaseType}</td>
       <td className="border px-4 py-2">
-        {purchaseType === "RENT" ? rentPerDay * minRentDays : unitPrice}
+        {purchaseType === "RENT"
+          ? rentPerDay * minRentDays
+          : purchaseType === "LENT"
+          ? 0
+          : unitPrice}
       </td>
       <td className="border px-4 py-2 text-center">
         <DeleteProduct productId={productId} />

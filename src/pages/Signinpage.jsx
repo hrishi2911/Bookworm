@@ -42,7 +42,8 @@ export default function SignInPage({ setIsLoggedIn }) {
         console.log("Login successful:", data);
         // Store authentication token or user info if needed
         // Redirect to homepage
-        localStorage.setItem("custId", data.customerId);
+        localStorage.setItem("custId", data.customer.customerId);
+        sessionStorage.setItem("token", data.token);
         setIsLoggedIn(true);
         localStorage.setItem("isLogIn", true);
         navigate("/");
@@ -88,7 +89,7 @@ export default function SignInPage({ setIsLoggedIn }) {
           />
         </div>
         <br />
-        <a className="p_signup" href="/signup">
+        <a className="p_signup" onClick={() => navigate("/signup")}>
           Not a member?
         </a>
         <br />

@@ -16,6 +16,7 @@ function HomepageLayout({
     setIsLoggedIn(false);
     localStorage.removeItem("isLogIn");
     localStorage.removeItem("custId");
+    sessionStorage.clear();
     // Optionally, redirect to login page
     navigate("/login"); // Redirect to login page after logout
   };

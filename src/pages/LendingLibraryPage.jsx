@@ -53,9 +53,9 @@ import BoxTitle from "../ui/BoxTitle";
 import EbookContainer from "../features/ProductLayout/EbookContainer";
 
 const libraries = [
-  { id: 1, packageName: "Basic Library", cost: 30, numberOfBooksAllowed: 4 },
-  { id: 2, packageName: "Gold Library", cost: 40, numberOfBooksAllowed: 6 },
-  { id: 3, packageName: "Premium Library", cost: 50, numberOfBooksAllowed: 10 },
+  { packageName: "Basic Library", cost: 30, numberOfBooksAllowed: 4 },
+  { packageName: "Gold Library", cost: 40, numberOfBooksAllowed: 6 },
+  { packageName: "Premium Library", cost: 50, numberOfBooksAllowed: 10 },
 ];
 
 const CardContainer = styled.div`
@@ -117,6 +117,7 @@ export default function LendingLibraryPage({ searchTerm }) {
     library["expiryDate"] = expiryDate;
     console.log(custId);
     if (custId === null || custId === undefined) return navigate("/login");
+    console.log(customerData);
     sendLibraryDetails(library, customerData, custId);
 
     setHaveLibrary(true);

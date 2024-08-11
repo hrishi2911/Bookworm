@@ -1,9 +1,10 @@
 /* eslint-disable react/no-unknown-property */
 import "./InvoicePage.css"; // Custom CSS for specific styles
-import { useSelector } from "react-redux";
-import { getCart, getTotalPrice } from "../Cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart, getCart, getTotalPrice } from "../Cart/cartSlice";
 import DeleteProduct from "../ProductLayout/DeleteProduct";
 import PayButton from "./PayButton";
+import { useNavigate } from "react-router-dom";
 
 const InvoicePage = () => {
   return (
@@ -36,7 +37,7 @@ const Invoice = () => {
         <table className="min-w-full bg-white border-collapse mb-6">
           <thead id="he" className="bg-gray-200">
             <tr>
-              <th className="w-1/12 border px-4 py-2">S.No.</th>
+              {/* <th className="w-1/12 border px-4 py-2">S.No.</th> */}
               <th className="w-2/12 border px-4 py-2">ISBN</th>
               <th className="w-2/12 border px-4 py-2">Product Type</th>
               <th className="w-3/12 border px-4 py-2">Title</th>
@@ -124,7 +125,7 @@ function TableRow({ product }) {
   } = product;
   return (
     <tr>
-      <td className="border px-4 py-2">{productId}</td>
+      {/* <td className="border px-4 py-2">{productId}</td> */}
       <td className="border px-4 py-2">{productIsbn}</td>
       <td className="border px-4 py-2">{productType}</td>
       <td className="border px-4 py-2">{productName}</td>
@@ -181,6 +182,12 @@ function TableRow({ product }) {
 // };
 
 const PaymentSection = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  function handleCancel() {
+    dispatch(clearCart());
+    navigate("/");
+  }
   return (
     <>
       {/* <div id="ps1">
@@ -204,7 +211,9 @@ const PaymentSection = () => {
       <div id="ps2">
         <PayButton id="bt1" value={"Pay"} />
         {/* <button id="bt1">PAY</button> */}
-        <button id="bt2">CANCEL</button>
+        <button id="bt2" onClick={handleCancel}>
+          CANCEL
+        </button>
         <button id="bt3">PRINT INVOICE</button>
         <button id="bt4">EMAIL INVOICE</button>
       </div>

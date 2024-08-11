@@ -71,7 +71,6 @@ export default function PayButton({ id, value }) {
         );
 
         const invoiceDetails = {
-          quantity: 0,
           basePrice:
             item.purchaseType === "RENT"
               ? item.minRentDays * item.rentPerDay

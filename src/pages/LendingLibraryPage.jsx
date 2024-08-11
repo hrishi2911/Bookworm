@@ -11,9 +11,9 @@ import EbookContainer from "../features/ProductLayout/EbookContainer";
 import { getMyShelfDetails } from "../services/apiMyShelf";
 
 const libraries = [
-  { packageName: "Basic Library", cost: 30, numberOfBooksAllowed: 4 },
-  { packageName: "Gold Library", cost: 40, numberOfBooksAllowed: 6 },
-  { packageName: "Premium Library", cost: 50, numberOfBooksAllowed: 10 },
+  { packageName: "Basic Library", cost: 300, numberOfBooksAllowed: 4 },
+  { packageName: "Gold Library", cost: 400, numberOfBooksAllowed: 6 },
+  { packageName: "Premium Library", cost: 500, numberOfBooksAllowed: 10 },
 ];
 
 const CardContainer = styled.div`

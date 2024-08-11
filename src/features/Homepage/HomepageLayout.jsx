@@ -32,7 +32,17 @@ function HomepageLayout({
         <HContent>
           <Head1>
             <div>
-              <img src={"./public/Logo.png"} alt="Main Logo" id="Logocss" />
+              <img
+                src={"./public/Logo.png"}
+                alt="Main Logo"
+                style={{
+                  position: "absolute",
+                  width: "189px",
+                  height: "58px",
+                  /* left: 137px; */
+                  top: "30px",
+                }}
+              />
             </div>
             <div
               style={{

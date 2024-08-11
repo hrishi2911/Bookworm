@@ -7,7 +7,7 @@ function SideMenu({ isLoggedIn }) {
 
   const arr = [
     "Home",
-    "Product",
+    "Genre",
     "Lending Library",
     "MyShelf",
     "MyLibrary",

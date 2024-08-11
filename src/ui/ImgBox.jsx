@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 
 export default function ImgBox({ imageURL, onClick }) {
-  return <StyledImgBox src={imageURL} onClick={onClick} />;
+  return <StyledImgBox src={"./public/" + imageURL} onClick={onClick} />;
 }
 const scaleUp = keyframes`
   0% {

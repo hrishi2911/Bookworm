@@ -38,7 +38,7 @@ export default function MusicOrVideoProduct({ product }) {
           <ContentBox>
             <BookDetails type="booktitle">{productName}</BookDetails>
             <BookDetails type="author">By {productAuthor}</BookDetails>
-            <BookDetails type="price">$ {productOfferPrice}</BookDetails>
+            <BookDetails type="price">₹ {productOfferPrice}</BookDetails>
           </ContentBox>
         </Box>
       </MusicVideoProductBox>

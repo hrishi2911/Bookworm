@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import EbookProduct from "./EbookProduct";
 
-export default function EbookContainer({ arr, fromLendingLibrary }) {
+export default function EbookContainer({
+  arr,
+  fromLendingLibrary,
+  lentBooksNumber,
+}) {
   return (
     <ProductBoxContainer>
       {arr
@@ -11,6 +15,7 @@ export default function EbookContainer({ arr, fromLendingLibrary }) {
             key={index}
             product={product}
             fromLendingLibrary={fromLendingLibrary}
+            lentBooksNumber={lentBooksNumber}
           />
         ))}
     </ProductBoxContainer>

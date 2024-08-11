@@ -1,46 +1,3 @@
-// import { useEffect, useState } from "react";
-// import { getAllProducts } from "../services/apiProduct";
-// import Spinner from "../ui/Spinner";
-// import BoxTitle from "../ui/BoxTitle";
-// import EbookContainer from "../features/ProductLayout/EbookContainer";
-
-// export default function LendingLibraryPage({ searchTerm }) {
-//   const [ebookList, setEbookList] = useState(null);
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       const data = await getAllProducts();
-//       setEbookList(
-//         data.filter(
-//           (product) =>
-//             product.productType.typeDesc === "EBOOK" && product.library === true
-//         )
-//       );
-//     };
-//     fetchData();
-//   }, []);
-
-//   const filterProducts = (products) => {
-//     if (!searchTerm) return products;
-//     return products.filter(
-//       (product) =>
-//         product.productName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-//         product.productAuthor
-//           .toLowerCase()
-//           .includes(searchTerm.toLowerCase()) ||
-//         product.productIsbn.includes(searchTerm)
-//     );
-//   };
-
-//   if (ebookList === null) return <Spinner />;
-
-//   const filteredEbooks = filterProducts(ebookList);
-//   return (
-//     <>
-//       <BoxTitle titleName={"eBook"} viewAll={"ebook"} />
-//       <EbookContainer arr={filteredEbooks} fromLibrary={true} />
-//     </>
-//   );
-// }
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "../ui/Button";
@@ -51,11 +8,12 @@ import { getAllProducts } from "../services/apiProduct";
 import Spinner from "../ui/Spinner";
 import BoxTitle from "../ui/BoxTitle";
 import EbookContainer from "../features/ProductLayout/EbookContainer";
+import { getMyShelfDetails } from "../services/apiMyShelf";
 
 const libraries = [
-  { id: 1, packageName: "Basic Library", cost: 30, numberOfBooksAllowed: 4 },
-  { id: 2, packageName: "Gold Library", cost: 40, numberOfBooksAllowed: 6 },
-  { id: 3, packageName: "Premium Library", cost: 50, numberOfBooksAllowed: 10 },
+  { packageName: "Basic Library", cost: 30, numberOfBooksAllowed: 4 },
+  { packageName: "Gold Library", cost: 40, numberOfBooksAllowed: 6 },
+  { packageName: "Premium Library", cost: 50, numberOfBooksAllowed: 10 },
 ];
 
 const CardContainer = styled.div`
@@ -93,6 +51,7 @@ const AllowedBooks = styled.p`
 export default function LendingLibraryPage({ searchTerm }) {
   const [haveLibrary, setHaveLibrary] = useState(false);
   const [customerData, setCustomerData] = useState();
+  const [lentBooksNumber, setLentBooksNumber] = useState(0);
   // const [libraryUpdated, setLibraryUpdated] = useState();
   const custId = localStorage.getItem("custId");
 
@@ -109,6 +68,22 @@ export default function LendingLibraryPage({ searchTerm }) {
     fetchCustomer();
   }, [custId]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getMyShelfDetails(localStorage.getItem("custId"));
+      const LentedBooksNumber = data.reduce(
+        (acc, book) => (book.tranType === "LENT" ? acc + 1 : acc + 0),
+        0
+      );
+      setLentBooksNumber(LentedBooksNumber);
+    };
+    fetchData();
+    // Calculate remaining days for rented books
+
+    // Filter out expired books
+    // const nonExpiredBooks = updatedBooks.filter(book => book.tranType !== 'Rent' || book.Remaining_Days > 0);
+  }, [custId, lentBooksNumber]);
+
   const navigate = useNavigate();
   function handleBuyLibrary(library) {
     const currentDate = new Date();
@@ -117,6 +92,7 @@ export default function LendingLibraryPage({ searchTerm }) {
     library["expiryDate"] = expiryDate;
     console.log(custId);
     if (custId === null || custId === undefined) return navigate("/login");
+    console.log(customerData);
     sendLibraryDetails(library, customerData, custId);
 
     setHaveLibrary(true);
@@ -157,7 +133,11 @@ export default function LendingLibraryPage({ searchTerm }) {
       {haveLibrary ? (
         <>
           <BoxTitle titleName={"eBook"} viewAll={"ebook"} />
-          <EbookContainer arr={filteredEbooks} fromLendingLibrary={true} />
+          <EbookContainer
+            arr={filteredEbooks}
+            fromLendingLibrary={true}
+            lentBooksNumber={lentBooksNumber}
+          />
         </>
       ) : (
         <CardContainer>

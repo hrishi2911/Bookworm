@@ -13,6 +13,7 @@ export default function EbookProduct({
   remainingDays,
   fromLendingLibrary,
   remainingBooks,
+  lentBooksNumber,
 }) {
   const {
     productImg,
@@ -92,14 +93,14 @@ export default function EbookProduct({
             <BookDetails type="booktitle">{productName}</BookDetails>
             <BookDetails type="author">By {productAuthor}</BookDetails>
             {!isMyshelf && (
-              <BookDetails type="price">$ {productOfferPrice}</BookDetails>
+              <BookDetails type="price">₹ {productOfferPrice}</BookDetails>
             )}
 
             {fromLendingLibrary ? (
               <>
                 {!isInCart && (
                   <CartButton onClick={handleAddtoCartLent}>
-                    Add To Library
+                    {lentBooksNumber < 6 ? "Add To Library" : ""}
                   </CartButton>
                 )}
                 {isInCart && (

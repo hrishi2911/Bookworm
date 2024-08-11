@@ -3,9 +3,11 @@ import { getMyShelfDetails } from "../services/apiMyShelf";
 import Spinner from "../ui/Spinner";
 import EbookProduct from "../features/ProductLayout/EbookProduct";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export default function Myshelf() {
   const [myshelf, setMyshelf] = useState(null);
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       const data = await getMyShelfDetails(localStorage.getItem("custId"));
@@ -16,6 +18,7 @@ export default function Myshelf() {
   }, []);
 
   console.log(myshelf);
+  if (!localStorage.getItem("isLogIn")) return navigate("/login");
   if (myshelf === null || myshelf.length === 0) return <Spinner />;
   return (
     <ProductBoxContainer>

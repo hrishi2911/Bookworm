@@ -2,6 +2,7 @@ export async function sendInvoice(CartPrice, custId) {
   const invoiceResponse = await fetch("http://localhost:8080/api/invoices", {
     method: "POST",
     headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -21,7 +22,12 @@ export async function sendInvoice(CartPrice, custId) {
 
 export async function BeneFieriesFetch(item) {
   const productBenResponse = await fetch(
-    `http://localhost:8080/api/productBeneficiaries/ben/${item.productId}`
+    `http://localhost:8080/api/productBeneficiaries/ben/${item.productId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+    }
   );
 
   if (!productBenResponse.ok) {
@@ -53,6 +59,7 @@ export async function sendRoyaltyCal(royaltyData) {
     {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(royaltyData),
@@ -71,6 +78,7 @@ export async function sendInvoiceDetails(invoiceDetails) {
     {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(invoiceDetails),

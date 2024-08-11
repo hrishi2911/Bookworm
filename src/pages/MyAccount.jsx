@@ -21,6 +21,7 @@ const MyAccount = () => {
     fetchData();
   }, [navigate]);
   console.log(customer);
+  if (!localStorage.getItem("isLogIn")) return navigate("/login");
   if (customer === null) return <Spinner />;
   return (
     <StyledContainer>

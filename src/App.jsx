@@ -43,6 +43,7 @@ function App() {
               path="/EBookViewAll"
               element={<ViewAllContainer searchTerm={searchTerm} />}
             />
+
             <Route path="/myaccount" element={<MyAccount />} />
             <Route path="/mylibrary" element={<MyLibrary />} />
             <Route path="/myshelf" element={<Myshelf />} />

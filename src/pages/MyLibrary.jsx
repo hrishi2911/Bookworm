@@ -4,6 +4,7 @@ import Spinner from "../ui/Spinner";
 import EbookProduct from "../features/ProductLayout/EbookProduct";
 import styled from "styled-components";
 import { getCustomer } from "../services/apiCustomer";
+import { useNavigate } from "react-router-dom";
 
 export default function MyLibrary() {
   const [myshelf, setMyshelf] = useState(null);
@@ -12,6 +13,7 @@ export default function MyLibrary() {
   const [books, setBooks] = useState(null);
   const [libraryExpiryDate, setLibraryExpiryDate] = useState(null);
   const custId = localStorage.getItem("custId");
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       const data = await getMyShelfDetails(localStorage.getItem("custId"));
@@ -49,6 +51,7 @@ export default function MyLibrary() {
   }, [custId, libraryExpiryDate, maxBooksAllowed]);
 
   console.log(myshelf);
+  if (!localStorage.getItem("isLogIn")) return navigate("/login");
   if (books === null || books.length === 0) return <Spinner />;
   const filteredBooks = books.filter(
     (item) =>
